@@ -1,0 +1,34 @@
+<html>
+
+<head>
+    <script lang="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script src="/simple-peer/simplepeer.min.js"></script>
+    <link type="text/css" href="/index.css" rel="stylesheet"></link>
+</head>
+
+<body>
+    <div id="room-selection-container" class="centered">
+        <!-- <h1>WebRTC video conference</h1> -->
+        <label>Enter the number of the room you want to connect</label>
+        <input id="room-input" type="text" />
+        <button id="connect-button" class="button">CONNECT</button>
+    </div >
+
+
+    <div id="videos" class="container" style="display: none">
+        <video id="localVideo" class="vid" autoplay muted></video>
+    </div>
+    <br />
+    <div id = "btn" style="display: none">
+        <button id="switchButton" class="button" onclick="switchMedia()">Switch Camera</button>
+        <button id="muteButton" class="button" onclick="toggleMute()">Unmuted</button>
+        <button id="vidButton" class="button" onclick="toggleVid()">Video Enabled</button>
+        <button id="cloButton" class="button" onclick="cloVid()">Video close</button>
+    </div>
+
+</body>
+<footer>
+    <script src='/js/main.js' lang="text/javascript"></script>
+</footer>
+
+</html>

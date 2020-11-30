@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>UserLogin</title>
+  <link rel="icon" href="../images/monkey.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet"><link rel="stylesheet" href="Signup.css">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+
+
+<!--Background-->
+<div class="hero">
+	<img class="monkey" src="../images/monkey.ico">
+    <a href="../home/home.html" class="title-box">
+        <span>Swagger</span>
+    </a>
+    <div class="navbar"> 
+      <nav>
+          <ul>
+			  <li><a href="../home/home.html">home</a></li>
+			  <li><a href="../Livehome/Livehome.html">Login</a></li>
+          </ul>
+      </nav>
+  </div>
+        <!--PEN HEADER-->
+    <div class="bubbles">
+        <img src="../images/bubble.png">
+        <img src="../images/bubble.png">
+        <img src="../images/bubble.png">
+        <img src="../images/bubble.png">
+        <img src="../images/bubble.png">
+        <img src="../images/bubble.png">
+        <img src="../images/bubble.png"> 
+    </div>
+    <!--PEN CONTENT-->
+    <section class="login-container">
+      <div class="login-inputs" id="login-inputs">
+      <h1>User Sign Up</h1>
+      <form class="form" id="myForm" action="login.html" method="POST">
+      	<input id="S_First_Name" name="S_First_Name" placeholder="First Name" type="text" required />
+	  	<input id="S_Last_Name" name="S_Last_Name" placeholder="Last Name" type="text" required/>
+	  	<input id="S_Account" name="S_Account" placeholder="Example@gmail.com" type="email" required />
+	  	<input id="S_Username" name="S_Username" placeholder="nickname" type="text" required />
+	  	<input id="S_Password" name="S_Password" placeholder="password" type="password" required />
+		<input id="S_RePassword" name="S_RePassword" placeholder="password" type="password" required />
+		<input id="D_Birthday" name="D_Birthday" placeholder="Birthday" type="date" required />
+	  	<input id="S_Phone" name="S_Phone" placeholder="0912345678" type="text" required />
+      	<button>Sign Up</button>
+      </form>
+      <a class="forget" href="../Livehome/Livehome.html">Do you have an account？ Click here to Login！</a>
+	  </div>
+	  
+	  <div class="Verify" id="Verify">
+		<h1>User Verify</h1>
+      	<form class="form" id="myVerify" action="login.html" method="POST">
+      	<input id="S_Verifiy" name="S_Verifiy" placeholder="Verifiy Code" type="text" required />
+      	<button>Verify</button>
+      	</form>
+	  </div>
+    </section>
+</div>
+<!-- partial -->
+  <script src="Signup.js"></script>
+</body>
+</html>
+
+
