@@ -24,7 +24,8 @@ pgadmin.execute('''CREATE TABLE Account
        S_Password text NOT NULL,
        I_Verify INT NOT NULL,
        D_Birthday DATE NOT NULL,
-       S_Phone text NOT NULL);''')
+       S_Phone text NOT NULL,
+       I_Open Integer NOT NULL);''')
 
 pg.commit()
 pg.close()

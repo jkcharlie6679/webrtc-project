@@ -21,7 +21,7 @@ myForm.addEventListener('submit', function (e) {
       showConfirmButton: false});
   }
   else{
-  fetch('http://140.118.121.100:5000/account/Sign_up',{
+  fetch('https://140.118.121.100:5000/account/Sign_up',{
     method: 'POST',
     headers: {
       'Accept': 'application/json, text/plain',
@@ -62,7 +62,7 @@ function render(data){
       
       if(VScode == S_Verifiy)
       {  
-      fetch('http://140.118.121.100:5000/account/Verify ',{
+      fetch('https://140.118.121.100:5000/account/Verify ',{
         method: 'PUT',
         headers: {
         'Accept': 'application/json, text/plain',

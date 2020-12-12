@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Profile</title>
+  <link rel="icon" href="../images/monkey.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet"><link rel="stylesheet" href="proedit.css">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script>
+      if(window.sessionStorage.getItem("Username") == null){
+        window.location.href="../Livehome/Livehome.html"
+      }
+  </script>
+</head>
+<body>
+
+
+<!--Background-->
+<div class="hero">
+	<img class="monkey" src="../images/monkey.ico">
+    <a href="../index.html" class="title-box">
+        <span>Swagger</span>
+    </a>
+    <div class="navbar"> 
+      <nav>
+          <ul>
+			  <li><a href="../index.html">home</a></li>
+			  <li><a href="../proedit/proedit.html" id="pro_username">Login</a></li>
+          </ul>
+      </nav>
+  </div>
+        <!--PEN HEADER-->
+    <div class="bubbles">
+        <img src="../images/bubble.png">
+        <img src="../images/bubble.png">
+        <img src="../images/bubble.png">
+        <img src="../images/bubble.png">
+        <img src="../images/bubble.png">
+        <img src="../images/bubble.png">
+        <img src="../images/bubble.png"> 
+    </div>
+    <!--PEN CONTENT-->
+    <section class="login-container">
+        <div class="Verify" id="Verify">
+            <h1>Profile</h1>
+              <form class="form" id="myVerify" action="login.html" method="POST">
+                <label>First_Name <div id="First_Name" name="First_Name"></div></label>
+                <label>Last_Name<div id="Last_Name" name="Last_Name"></div></label>
+                <label>Account&nbsp;&nbsp;&nbsp;&nbsp;<div id="Account" name="Account"></div></label>
+                <label>Username&nbsp;&nbsp;<div id="Username" name="Username"></div></label>
+                <label>Password&nbsp;&nbsp;&nbsp;<div id="Password" name="Password"></div></label>
+                <label>Birthday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div id="Birthday" name="Birthday"></div></label>
+                <label>Phone&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div id="Phone" name="Phone"></div></label>
+              <button>Edit</button>
+              </form>
+          </div>
+
+
+      <div class="login-inputs" id="login-inputs">
+      <h1>Edit your Profile</h1>
+      <form class="form" id="myForm" action="login.html" method="PUT">
+      	<label id="E_First_Name">First_Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="S_First_Name" name="S_First_Name" placeholder="First Name" type="text" required /></label>
+	  	  <label id="E_Last_Name">Last_Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="S_Last_Name" name="S_Last_Name" placeholder="Last Name" type="text" required/></label>
+	  	  <label id="E_Account">Account&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div id="S_Account" name="Account"></div></label>
+	  	  <label id="E_Username">Username&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="S_Username" name="S_Username" placeholder="username" type="text" required /></label>
+	  	  <label id="E_Password">Password&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="S_Password" name="S_Password" placeholder="password" type="password"  required /></label>
+		    <label id="E_RePassword">Confirm Password<input id="S_RePassword" name="S_RePassword" placeholder="password Confirm" type="password" required /></label>
+		    <label id="E_Birthday">Birthday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="D_Birthday" name="D_Birthday" placeholder="Birthday" type="date" required /></label>
+	  	  <label id="E_Phone">Phone Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="S_Phone" name="S_Phone" placeholder="0912345678" type="text" required /></label>
+      	<button>Update</button>
+      </form>
+	  </div>
+    </section>
+</div>
+<!-- partial -->
+  <script src="proedit.js"></script>
+</body>
+</html>
+
+

@@ -9,24 +9,32 @@ let localStream = null;
 /**
  * All peer connections
  */
-const videoChatContainer = document.getElementById('videos')
-const roomSelectionContainer = document.getElementById('room-selection-container')
-const btnContainer = document.getElementById('btn')
 let peers = {}
 let roomID
-// let userName = prompt("Hey there, what's your name?", "Incognito") || "no_name";
-const connectButton = document.getElementById('connect-button')
-const roomInput = document.getElementById('room-input')
+let  send
+let userName = window.sessionStorage.getItem("Username");
 
+
+const chatForm = document.getElementById('chat-form');
+const chatMessages = document.getElementById('chat-messages');
+
+
+const Closeroom = document.getElementById('Close_room')
+const Leaveroom = document.getElementById('Leave_room')
+const Closestream = document.getElementById('Close_stream')
+
+
+
+document.getElementById("logo_title").innerHTML = window.sessionStorage.getItem("identity") + "'s Room " ;
 // redirect if not https
-if(location.href.substr(0,5) !== 'https') 
-    location.href = 'https' + location.href.substr(4, location.href.length - 4)
+// if(location.href.substr(0,5) !== 'https')
+    // location.href = 'https' + location.href.substr(4, location.href.length - 4)
 
 
 //////////// CONFIGURATION //////////////////
 
 /**
- * RTCPeerConnection configuration 
+ * RTCPeerConnection configuration
  */
 const configuration = {
     "iceServers": [{
@@ -48,8 +56,12 @@ const configuration = {
 let constraints = {
     audio: true,
     video: {
-        width: 200,
-        height: 200
+        width: {
+            max: 300
+        },
+        height: {
+            max: 300
+        } 
     }
 }
 
@@ -62,42 +74,49 @@ constraints.video.facingMode = {
 // enabling the camera at startup
 
 
-connectButton.addEventListener('click', () => {
-    joinRoom(roomInput.value)
+function start(){
+    joinRoom()
     navigator.mediaDevices.getUserMedia(constraints).then(stream => {
         console.log('Received local stream');
-    
+
         localVideo.srcObject = stream;
         localStream = stream;
-    
-        init()
-    
-    }).catch(e => alert(`getusermedia error ${e.name}`))
-    
-})
 
+        init()
+
+    }).catch(e => alert(`getusermedia error ${e.name}`))
+}
+
+function joinRoom() {
+    roomId = window.sessionStorage.getItem("roomid");
+}
 
 /**
  * initialize the socket connections
  */
+
+
+
+socket = io('https://140.118.121.100:3012')
+start()
+
 function init() {
-    showVideoConference()
-    socket = io()
+
+    
     socket.emit('join', roomId)
-    // new user in room show on already
+
     socket.on('initReceive', socket_id => {
         console.log('INIT RECEIVE ' + socket_id)
         addPeer(socket_id, false)
 
         socket.emit('initSend', socket_id)
     })
-    // already in room show on new 
+
     socket.on('initSend', socket_id => {
         console.log('INIT SEND ' + socket_id)
         addPeer(socket_id, true)
-        console.log(peers)
     })
-    // show on still in room
+
     socket.on('removePeer', socket_id => {
         console.log('removing peer ' + socket_id)
         removePeer(socket_id)
@@ -112,21 +131,14 @@ function init() {
 
     socket.on('signal', data => {
         peers[data.socket_id].signal(data.signal)
+        //console.log("fuck")
+        //console.log(peers[data.socket_id])
     })
-}
-
-function joinRoom(room) {
-    if (room === '') {
-      alert('Please type a room ID')
-    } else {
-      roomId = room
-    }
-}
-
-function showVideoConference() {
-    roomSelectionContainer.style = 'display: none'
-    videoChatContainer.style = 'display: block'
-    btnContainer.style = 'display: block'
+    
+    //socket.on('SendData', send => {
+    //    peers[data.socket_id].data = send
+    //})
+    //console.log("www")
 }
 
 /**
@@ -154,11 +166,11 @@ function removePeer(socket_id) {
 
 /**
  * Creates a new peer connection and sets the event listeners
- * @param {String} socket_id 
+ * @param {String} socket_id
  *                 ID of the peer
- * @param {Boolean} am_initiator 
+ * @param {Boolean} am_initiator
  *                  Set to true if the peer initiates the connection process.
- *                  Set to false if the peer receives the connection. 
+ *                  Set to false if the peer receives the connection.
  */
 function addPeer(socket_id, am_initiator) {
     peers[socket_id] = new SimplePeer({
@@ -171,7 +183,9 @@ function addPeer(socket_id, am_initiator) {
         socket.emit('signal', {
             signal: data,
             socket_id: socket_id
+            //data: send
         })
+        //console.log(send)
     })
 
     peers[socket_id].on('stream', stream => {
@@ -231,6 +245,7 @@ function switchMedia() {
 
         updateButtons()
     })
+    console.log("ddd")
 }
 
 /**
@@ -247,7 +262,6 @@ function setScreen() {
                     }
                 }
             }
-
         }
         localStream = stream
 
@@ -255,6 +269,7 @@ function setScreen() {
         socket.emit('removeUpdatePeer', '')
     })
     updateButtons()
+    
 }
 
 /**
@@ -284,6 +299,7 @@ function toggleMute() {
         localStream.getAudioTracks()[index].enabled = !localStream.getAudioTracks()[index].enabled
         muteButton.innerText = localStream.getAudioTracks()[index].enabled ? "Unmuted" : "Muted"
     }
+    console.log("aaa")
 }
 /**
  * Enable/disable video
@@ -293,6 +309,7 @@ function toggleVid() {
         localStream.getVideoTracks()[index].enabled = !localStream.getVideoTracks()[index].enabled
         vidButton.innerText = localStream.getVideoTracks()[index].enabled ? "Video Enabled" : "Video Disabled"
     }
+    console.log("ddd")
 }
 
 /**
@@ -306,4 +323,82 @@ function updateButtons() {
         muteButton.innerText = localStream.getAudioTracks()[index].enabled ? "Unmuted" : "Muted"
     }
 }
+
+socket.on('message', message=>{
+    console.log(message);
+    outputMessage(message);
+});
+
+
+socket.on('sent_close', () =>{
+    document.getElementById("logo_title").innerHTML = " The room is close ! See you next time";
+});
+
+
+chatForm.addEventListener('submit',(e) =>{
+    e.preventDefault();
+    const msg = userName + ':' + e.target.elements.msg.value;
+    socket.emit('chatMessage', msg);
+});
+
+function outputMessage(message) {
+    const div = document.createElement('div');
+    div.classList.add('message');
+    div.innerHTML = `
+    <p class="text">
+      ${message}
+    </p>`;
+    document.querySelector('.chat-messages').appendChild(div);
+}
+setTimeout(function(){
+    init_send()}
+    ,2000);
+function init_send(){
+    socket.emit('chatMessage', userName + ' join the room');
+}
+
+// socket.emit('chatMessage', 'asd');
+roomidentity()
+function roomidentity(){
+    let identity  = window.sessionStorage.getItem("people");
+
+    if(identity == 'customer'){
+        Closeroom.style = 'display: none'
+        Leaveroom.style = 'display: block'
+    }
+    else if(identity == 'streamer'){
+        Closeroom.style = 'display: block'
+        Leaveroom.style = 'display: none'
+    }
+}
+
+Closestream.addEventListener('submit', function (e) {
+    e.preventDefault();
+    let account = window.sessionStorage.getItem("Account");
+
+    let param = "https://140.118.121.100:5000/account/close?S_Account="+account;
+    console.log(param);
+    fetch(param,{
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json, text/plain',
+          'Content-Type': 'application/json'
+        }
+      }).then(response => {
+        return response.json()
+      }) 
+      .then( (data) =>{
+        close(data)
+      })
+})
+
+function close(data){
+    swal("Success", "Room has already closed", "success", {timer: 2000
+        ,showConfirmButton: false});
+    setTimeout(function(){
+      window.location.href="../index.html"}
+      ,2000);
+    socket.emit('close');
+}
+
 

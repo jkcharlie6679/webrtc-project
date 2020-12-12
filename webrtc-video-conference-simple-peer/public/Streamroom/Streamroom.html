@@ -1,0 +1,80 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="../images/monkey.ico" type="image/x-icon" />
+  <title>Swagger</title>
+    <script lang="text/javascript" src="https://140.118.121.100:3012/socket.io/socket.io.js"></script>
+    <script src="https://140.118.121.100:3012/simple-peer/simplepeer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link type="text/css" href="./Streamroom.css" rel="stylesheet"></link>
+    <script>
+      if(window.sessionStorage.getItem("Username") == null)
+      {
+          window.location.href="../Livehome/Livehome.html"
+      }
+    </script>
+</head>
+
+<body>
+  <div class="title">
+    <div class="logo"><img src="../images/monkey.ico" class="logo_img"></div>
+    <div class="logo_title" id="logo_title">Swagger</div>
+
+    <div class="navbar">
+        <nav>
+            <ul id="afterlogin">
+                <li id = "Close_room"><form id="Close_stream"><button class="close_btn">Close room</button></form></li>
+                <li id = "Leave_room"><a href="../index.html">Leave room</a></li>
+            </ul>
+        </nav>
+    </div>
+  </div>
+
+    <div id = "videos">
+      <video id = "localVideo" class = "vid" autoplay muted></video>
+    </div>
+
+    <br />
+
+    <div id = "btn">
+      <button id = "switchButton" class = "button" onclick = "switchMedia()">Switch Camera</button>
+      <button id = "muteButton" class = "button" onclick = "toggleMute()">Unmuted</button>
+      <button id = "vidButton" class = "button" onclick = "toggleVid()">Video Enabled</button>
+    </div>
+
+    <div id = "chat-container" class = "chat-container">
+
+      <div class = "chat-header">
+        <h1>ChatCord</h1>
+      </div>
+
+
+       
+      <div class ="chat-messages">
+
+      </div>
+
+      <div class="chat-form-container">
+        <form id="chat-form">
+          <input
+           class="chat_input"
+            id="msg"
+            type="text"
+            placeholder="Enter Message"
+            required
+            autocomplete="off"
+          />
+          <button class="btn" id = "scroll">Send</button>
+        </form>
+      </div>
+
+    </div>
+
+</body>
+<footer>
+    <script src='./main.js' lang="text/javascript"></script>
+</footer>
+
+</html>

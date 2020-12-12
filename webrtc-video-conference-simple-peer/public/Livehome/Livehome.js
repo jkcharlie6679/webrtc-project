@@ -21,24 +21,29 @@ inputs.forEach(input => {
 
 /*************************************************** */
 
+
+let user = "local";
+let password = "123123"
+// let param = test + user + password;
+// console.log(param);
+
 const myForm = document.getElementById('myForm');
 myForm.addEventListener('submit', function (e) {
   e.preventDefault();
-
+  
   let S_Account = document.getElementById('S_Account').value;
   let S_Password = document.getElementById('S_Password').value;
-
-
-  fetch('http://140.118.121.100:5000/account/Login',{
-    method: 'POST',
+  let test = "https://140.118.121.100:5000/account/Login?S_Account="+S_Account+"&S_Password="+S_Password;
+  // console.log(test)
+  fetch(test,{
+    method: 'GET',
     headers: {
       'Accept': 'application/json, text/plain',
       'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-	  S_Account:S_Account,
-      S_Password:S_Password,
-    })
+    }
+    // body: JSON.stringify({
+    //   test
+    // })
   }).then(response => {
     return response.json()
   }) 
@@ -58,7 +63,7 @@ function render(data){
     window.sessionStorage.setItem("Username", data.S_Username);
     window.sessionStorage.setItem("Account", data.S_Account);
     setTimeout(function(){
-      window.location.replace('../home/home.html');
+      window.location.replace('../index.html');
     },1000);
   }
   else if(market == '1'){
