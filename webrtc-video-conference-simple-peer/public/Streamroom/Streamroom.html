@@ -26,14 +26,26 @@
         <nav>
             <ul id="afterlogin">
                 <li id = "Close_room"><form id="Close_stream"><button class="close_btn">Close room</button></form></li>
-                <li id = "Leave_room"><a href="../index.html">Leave room</a></li>
+                <li id = "Leave_room"><form id="Leave_stream"><button class="leave_btn">Leave room</button></form></li>
+                <!-- <li id = "Leave_room"><a href="../index.html">Leave room</a></li> -->
             </ul>
         </nav>
     </div>
   </div>
 
     <div id = "videos">
-      <video id = "localVideo" class = "vid" autoplay muted></video>
+      <video id = "localVideo" class = "vid" autoplay muted></video> <!--mark  "autoplay muted" clear self video-->
+      <img src="../images/gift/car.png" id="car" class="carimg">
+      <img src="../images/gift/cupid-arrow.png" id="arrow" class="arrowimg">
+      <img src="../images/gift/diamond.png" id="diamond" class="diamondimg">
+      <img src="../images/gift/dove.png" id="dove" class="doveimg">
+      <img src="../images/gift/gift-box.png" id="gift" class="giftimg">
+      <img src="../images/gift/microphone.png" id="microphone" class="microphoneimg">
+      <img src="../images/gift/rocket.png" id="rocket" class="rocketimg">
+      <img src="../images/gift/teddy-bear.png" id="teddy" class="teddyimg">
+      <img src="../images/gift/treasure.png" id="treature" class="treatureimg">
+      <img src="../images/gift/universe.png" id="universe" class="universeimg">
+      <div class="GiftMessage" id = "GiftMessage"></div>
     </div>
 
     <br />
@@ -52,7 +64,7 @@
 
 
        
-      <div class ="chat-messages">
+      <div class ="chat-messages" id="chat-messages">
 
       </div>
 
@@ -68,7 +80,23 @@
           />
           <button class="btn" id = "scroll">Send</button>
         </form>
+        <button class = "sendgift" id = "sengift" onclick="showreward()">Reward</button>
       </div>
+      <div class="reward" id="reward">
+        <input type="button" class="car" onclick="changecar()">
+        <input type="button" class="arrow" onclick="changearrow()">
+        <input type="button" class="diamond" onclick="changediamond()">
+        <input type="button" class="dove" onclick="changedove()">
+        <input type="button" class="gift" onclick="changegift()">
+        <input type="button" class="microphone" onclick="changemicrophone()">
+        <input type="button" class="rocket" onclick="changerocket()">
+        <input type="button" class="teddy" onclick="changeteddy()">
+        <input type="button" class="treature" onclick="changetreature()">
+        <input type="button" class="universe" onclick="changeuniverse()">
+      </div>
+      
+
+
 
     </div>
 

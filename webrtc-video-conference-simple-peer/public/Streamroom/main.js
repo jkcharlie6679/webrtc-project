@@ -11,7 +11,7 @@ let localStream = null;
  */
 let peers = {}
 let roomID
-let  send
+let send
 let userName = window.sessionStorage.getItem("Username");
 
 
@@ -22,6 +22,24 @@ const chatMessages = document.getElementById('chat-messages');
 const Closeroom = document.getElementById('Close_room')
 const Leaveroom = document.getElementById('Leave_room')
 const Closestream = document.getElementById('Close_stream')
+const Leavestream = document.getElementById('Leave_stream')
+
+const chatmessages = document.getElementById('chat-messages')
+
+const carContainer = document.getElementById('car');
+const arrowContainer = document.getElementById('arrow');
+const diamondContainer = document.getElementById('diamond');
+const doveContainer = document.getElementById('dove');
+const giftContainer = document.getElementById('gift');
+const microphoneContainer = document.getElementById('microphone');
+const rocketContainer = document.getElementById('rocket');
+const teddyContainer = document.getElementById('teddy');
+const treatureContainer = document.getElementById('treature');
+const universeContainer = document.getElementById('universe');
+const rewardContainer = document.getElementById('reward');
+const GiftMessageContainer = document.getElementById('GiftMessage');
+const sengiftContainer = document.getElementById('sengift');
+
 
 
 
@@ -56,12 +74,8 @@ const configuration = {
 let constraints = {
     audio: true,
     video: {
-        width: {
-            max: 300
-        },
-        height: {
-            max: 300
-        } 
+        width: 300,
+        height: 300
     }
 }
 
@@ -131,14 +145,7 @@ function init() {
 
     socket.on('signal', data => {
         peers[data.socket_id].signal(data.signal)
-        //console.log("fuck")
-        //console.log(peers[data.socket_id])
     })
-    
-    //socket.on('SendData', send => {
-    //    peers[data.socket_id].data = send
-    //})
-    //console.log("www")
 }
 
 /**
@@ -269,7 +276,6 @@ function setScreen() {
         socket.emit('removeUpdatePeer', '')
     })
     updateButtons()
-    
 }
 
 /**
@@ -337,7 +343,8 @@ socket.on('sent_close', () =>{
 
 chatForm.addEventListener('submit',(e) =>{
     e.preventDefault();
-    const msg = userName + ':' + e.target.elements.msg.value;
+    const msg = new Date().Format("hh:mm") + ' ' + userName + ' :' + e.target.elements.msg.value;
+    e.target.elements.msg.value = ''
     socket.emit('chatMessage', msg);
 });
 
@@ -349,12 +356,14 @@ function outputMessage(message) {
       ${message}
     </p>`;
     document.querySelector('.chat-messages').appendChild(div);
+    chatmessages.scrollTop = chatmessages.scrollHeight;
 }
 setTimeout(function(){
-    init_send()}
+    msg_send(userName + ' join the room')}
     ,2000);
-function init_send(){
-    socket.emit('chatMessage', userName + ' join the room');
+
+function msg_send(msg){
+    socket.emit('chatMessage', msg);
 }
 
 // socket.emit('chatMessage', 'asd');
@@ -402,3 +411,196 @@ function close(data){
 }
 
 
+Leavestream.addEventListener('submit', function (e) {
+    msg_send(userName + ' leave the room')
+    e.preventDefault();
+    swal("Success", "See you next time", "success", {timer: 2000
+        ,showConfirmButton: false});
+    setTimeout(function(){
+      window.location.href="../index.html"}
+      ,2000);
+
+})
+
+Date.prototype.Format = function (fmt) { 
+    var o = {
+        "M+": this.getMonth() + 1, //月份 
+        "d+": this.getDate(), //日 
+        "h+": this.getHours(), //小时 
+        "m+": this.getMinutes(), //分 
+        "s+": this.getSeconds(), //秒 
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+        "S": this.getMilliseconds() //毫秒 
+    };
+    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
+}
+
+
+
+/*========gift-------------*/
+
+
+
+sendgift()
+function sendgift(){
+    let identity  = window.sessionStorage.getItem("people");
+    carContainer.style = 'display:none';
+    arrowContainer.style = 'display:none';
+    diamondContainer.style = 'display:none';
+    doveContainer.style = 'display:none';
+    giftContainer.style = 'display:none';
+    microphoneContainer.style = 'display:none';
+    rocketContainer.style = 'display:none';
+    teddyContainer.style = 'display:none';
+    treatureContainer.style = 'display:none';
+    universeContainer.style = 'display:none';
+    GiftMessageContainer.style = 'display:none';
+    rewardContainer.style = 'display:none;';
+
+    if(identity == 'customer'){
+        sengiftContainer.style = 'display:block;';
+    }
+    else if(identity == 'streamer'){
+        sengiftContainer.style = 'display:none'
+    }
+}
+
+var status = 0;
+function showreward(){
+    if(status == 0){
+        rewardContainer.style = 'display:none';
+        status = 1;
+    }
+    else if (status ==1){
+        rewardContainer.style = 'display:block';
+        status = 0;
+    }
+}
+
+socket.on('sent_reward', (message)=>{
+    // console.log(message);
+    if(message === 'car'){
+        carContainer.style='display:block';
+        setTimeout(function(){
+            carContainer.style='display:none';
+        },5000)
+    }
+    if(message === 'arrow'){
+        arrowContainer.style='display:block';
+        setTimeout(function(){
+            arrowContainer.style='display:none';
+        },5000)
+    }
+    if(message === 'diamond'){
+        diamondContainer.style='display:block';
+        setTimeout(function(){
+            diamondContainer.style='display:none';
+        },5000)
+    }
+    if(message === 'dove'){
+        doveContainer.style='display:block';
+        setTimeout(function(){
+            doveContainer.style='display:none';
+        },5000)
+    }
+    if(message === 'gift'){
+        giftContainer.style='display:block';
+        setTimeout(function(){
+            giftContainer.style='display:none';
+        },5000)
+    }
+    if(message === 'microphone'){
+        microphoneContainer.style='display:block';
+        setTimeout(function(){
+            microphoneContainer.style='display:none';
+        },5000)
+    }
+    if(message === 'rocket'){
+        rocketContainer.style='display:block';
+        setTimeout(function(){
+            rocketContainer.style='display:none';
+        },5000)
+    }
+    if(message === 'teddy'){
+        teddyContainer.style='display:block';
+        setTimeout(function(){
+            teddyContainer.style='display:none';
+        },5000)
+    }
+    if(message === 'treature'){
+        treatureContainer.style='display:block';
+        setTimeout(function(){
+            treatureContainer.style='display:none';
+        },5000)
+    }
+    if(message === 'universe'){
+        universeContainer.style='display:block';
+        setTimeout(function(){
+            universeContainer.style='display:none';
+        },5000)
+    }
+});
+socket.on('sent_reward_word', (message)=>{
+    // console.log(message);
+    GiftMessageContainer.style = 'display:block;';
+    document.getElementById("GiftMessage").innerHTML = message;
+    setTimeout(function(){
+        GiftMessageContainer.style = 'display:none;';
+    },5000)
+    
+    
+});
+
+function changecar(){
+    socket.emit('reward', 'car');
+    socket.emit('reward_word', userName + ' send a car to ' + window.sessionStorage.getItem("identity"));
+    msg_send(new Date().Format("hh:mm") + ' ' + userName + ' send a car to ' + window.sessionStorage.getItem("identity"));
+}
+function changearrow(){
+    socket.emit('reward', 'arrow');
+    socket.emit('reward_word', userName + ' send a arrow to ' + window.sessionStorage.getItem("identity"));
+    msg_send(new Date().Format("hh:mm") + ' ' + userName + ' send a arrow to ' + window.sessionStorage.getItem("identity"));
+}
+function changediamond(){
+    socket.emit('reward', 'diamond');
+    socket.emit('reward_word', userName + ' send a diamond to ' + window.sessionStorage.getItem("identity"));
+    msg_send(new Date().Format("hh:mm") + ' ' + userName + ' send a diamond to ' + window.sessionStorage.getItem("identity"));
+}
+function changedove(){
+    socket.emit('reward', 'dove');
+    socket.emit('reward_word', userName + ' send a dove to ' + window.sessionStorage.getItem("identity"));
+    msg_send(new Date().Format("hh:mm") + ' ' + userName + ' send a dove to ' + window.sessionStorage.getItem("identity"));
+}
+function changegift(){
+    socket.emit('reward', 'gift');
+    socket.emit('reward_word', userName + ' send a gift to ' + window.sessionStorage.getItem("identity"));
+    msg_send(new Date().Format("hh:mm") + ' ' + userName + ' send a gift to ' + window.sessionStorage.getItem("identity"));
+}
+function changemicrophone(){
+    socket.emit('reward', 'microphone');
+    socket.emit('reward_word', userName + ' send a microphone to ' + window.sessionStorage.getItem("identity"));
+    msg_send(new Date().Format("hh:mm") + ' ' + userName + ' send a microphone to ' + window.sessionStorage.getItem("identity"));
+}
+function changerocket(){
+    socket.emit('reward', 'rocket');
+    socket.emit('reward_word', userName + ' send a rocket to ' + window.sessionStorage.getItem("identity"));
+    msg_send(new Date().Format("hh:mm") + ' ' + userName + ' send a rocket to ' + window.sessionStorage.getItem("identity"));
+}
+function changeteddy(){
+    socket.emit('reward', 'teddy');
+    socket.emit('reward_word', userName + ' send a teddy to ' + window.sessionStorage.getItem("identity"));
+    msg_send(new Date().Format("hh:mm") + ' ' + userName + ' send a teddy to ' + window.sessionStorage.getItem("identity"));
+}
+function changetreature(){
+    socket.emit('reward', 'treature');
+    socket.emit('reward_word', userName + ' send a treature to ' + window.sessionStorage.getItem("identity"));
+    msg_send(new Date().Format("hh:mm") + ' ' + userName + ' send a treature to ' + window.sessionStorage.getItem("identity"));
+}
+function changeuniverse(){
+    socket.emit('reward', 'universe');
+    socket.emit('reward_word', userName + ' send a universe to ' + window.sessionStorage.getItem("identity"));
+    msg_send(new Date().Format("hh:mm") + ' ' + userName + ' send a universe to ' + window.sessionStorage.getItem("identity"));
+}

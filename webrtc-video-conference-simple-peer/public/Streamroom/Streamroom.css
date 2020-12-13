@@ -1,6 +1,15 @@
 *{
     font-family: Century Gothic;
 }
+body{
+    overflow-x: hidden;
+}
+#videos{
+    /* border: 2px solid #16a085; */
+    width: 1150px;
+    min-height: 600px;
+    height: auto;
+}
 .button {
     -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
     -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -156,12 +165,353 @@ nav ul li a:hover{
     font-weight: 700;
     border-radius: 50px;
 }
-
+.leave_btn{
+    border: none;
+    position: relative;
+    top: 10px;
+    background-color:rgba(0, 0, 0, 0);
+    font-size: 24px;
+    font-weight: 700;
+    border-radius: 50px;
+}
 .chat_input{
     height: 50px;
-    width: 280px;
+    width: 245px;
 }
 .btn{
     height: 50px;
     width: 60px;
+    border-radius: 10px;
+
+}
+.sendgift{
+    position: absolute;
+    right: -10px;
+    top: 0px;
+    height: 50px;
+    width: 60px;
+    border-radius: 10px;
+}
+
+/*---------------*/
+.reward{
+    position: absolute;
+    text-align: center;
+    top: 350px;
+    width: 375px;
+    height: 140px;
+    border: 2px solid #000;
+    background-color: #FFBAC3;
+    border: 2px solid #d44356;
+    border-radius: 20px;
+}
+.car{
+    background-image:url(../images/gift/car.png);
+    width: 64px;
+    height: 64px;
+    border: none;
+}
+.carimg{
+    position: absolute;
+    top: 30%;
+    left: -100px;
+    z-index: 100;
+    width: 250px;
+    height: 250px;
+}
+#car{
+    animation: car 5s linear infinite;
+}
+.arrow{
+    background-image:url(../images/gift/cupid-arrow.png);
+    width: 64px;
+    height: 64px;
+    border: none;
+}
+.arrowimg{
+    position: absolute;
+    top: 30%;
+    left: -100px;
+    z-index: 100;
+    width: 250px;
+    height: 250px;
+}
+#arrow{
+    animation: arrow 5s linear infinite;
+}
+.diamond{
+    background-image:url(../images/gift/diamond.png);
+    width: 64px;
+    height: 64px;
+    border: none;
+}
+.diamondimg{
+    position: absolute;
+    top: 30%;
+    left: -100px;
+    z-index: 100;
+    width: 250px;
+    height: 250px;
+}
+#diamond{
+    animation: diamond 5s linear infinite;
+}
+.dove{
+    background-image:url(../images/gift/dove.png);
+    width: 64px;
+    height: 64px;
+    border: none;
+}
+.doveimg{
+    position: absolute;
+    top: 30%;
+    left: -100px;
+    z-index: 100;
+    width: 150px;
+    height: 150px;
+}
+#dove{
+    animation: dove 5s linear infinite;
+}
+.gift{
+    background-image:url(../images/gift/gift-box.png);
+    width: 64px;
+    height: 64px;
+    border: none;
+}
+.giftimg{
+    position: absolute;
+    top: 30%;
+    left: -100px;
+    z-index: 100;
+    width: 250px;
+    height: 250px;
+}
+#gift{
+    animation: gift 5s linear infinite;
+}
+.microphone{
+    background-image:url(../images/gift/microphone.png);
+    width: 64px;
+    height: 64px;
+    border: none;
+}
+.microphoneimg{
+    position: absolute;
+    top: 30%;
+    left: -100px;
+    z-index: 100;
+    width: 200px;
+    height: 200px;
+}
+#microphone{
+    animation: gift 5s linear infinite;
+}
+.rocket{
+    background-image:url(../images/gift/rocket.png);
+    width: 64px;
+    height: 64px;
+    border: none;
+}
+.rocketimg{
+    position: absolute;
+    top: 30%;
+    left: -100px;
+    z-index: 100;
+    width: 200px;
+    height: 200px;
+}
+#rocket{
+    animation: rocket 5s linear infinite;
+}
+.teddy{
+    background-image:url(../images/gift/teddy-bear.png);
+    width: 64px;
+    height: 64px;
+    border: none;
+}
+.teddyimg{
+    position: absolute;
+    top: 30%;
+    left: -100px;
+    z-index: 100;
+    width: 200px;
+    height: 200px;
+}
+#teddy{
+    animation: gift 5s linear infinite;
+}
+.treature{
+    background-image:url(../images/gift/treasure.png);
+    width: 64px;
+    height: 64px;
+    border: none;
+}
+.treatureimg{
+    position: absolute;
+    top: 30%;
+    left: -100px;
+    z-index: 100;
+    width: 200px;
+    height: 200px;
+}
+#treature{
+    animation: gift 5s linear infinite;
+}
+.universe{
+    background-image:url(../images/gift/universe.png);
+    width: 64px;
+    height: 64px;
+    border: none;
+}
+.universeimg{
+    position: absolute;
+    top: 30%;
+    left: -100px;
+    z-index: 100;
+    width: 200px;
+    height: 200px;
+}
+#universe{
+    animation: universe 5s linear infinite;
+}
+@keyframes car{
+    0%{
+        transform: translateX(-400vh);
+        opacity: 0;
+    }
+    20%{
+
+        opacity: 1;
+    }
+    80%{
+
+        opacity: 1;
+    }
+    100%{
+        transform: translateX(500vh);
+        opacity: 0;
+    }
+}
+@keyframes arrow{
+    0%{
+        transform: translate(-20vh,-40vh);
+        opacity: 0;
+    }
+    30%{
+
+        opacity: 1;
+    }
+    70%{
+
+        opacity: 1;
+    }
+    100%{
+        transform: translate(180vh,35vh);
+        opacity: 0;
+    }
+}
+@keyframes diamond{
+    0%{
+        transform: translate(100vh,10vh);
+        opacity: 0;
+    }
+    30%{
+
+        opacity: 1;
+    }
+    70%{
+
+        opacity: 1;
+    }
+    100%{
+        transform: translate(100vh,10vh);
+        opacity: 0;
+    }
+}
+@keyframes dove{
+    0%{
+        transform: translate(220vh,0vh);
+        opacity: 0;
+    }
+    30%{
+
+        opacity: 1;
+    }
+    70%{
+
+        opacity: 1;
+    }
+    100%{
+        transform: translate(-100vh,30vh);
+        opacity: 0;
+    }
+}
+@keyframes gift{
+    0%{
+        transform: translate(100vh,10vh);
+        opacity: 0;
+    }
+    30%{
+
+        opacity: 1;
+    }
+    70%{
+
+        opacity: 1;
+    }
+    100%{
+        transform: translate(100vh,10vh);
+        opacity: 0;
+    }
+}
+@keyframes rocket{
+    0%{
+        transform: translate(30vh,35vh);
+        opacity: 0;
+    }
+    10%{
+
+        opacity: 1;
+    }
+    90%{
+
+        opacity: 1;
+    }
+    100%{
+        transform: translate(1000vh,-1000vh);
+        opacity: 0;
+    }
+}
+@keyframes universe{
+    0%{
+        transform: translateX(200vh);
+        opacity: 0;
+    }
+    20%{
+
+        opacity: 1;
+    }
+    80%{
+
+        opacity: 1;
+    }
+    100%{
+        transform: translateX(-300vh);
+        opacity: 0;
+    }
+}
+.GiftMessage{
+    position: absolute;
+    top: 60%;
+    left: 600px;
+    z-index: 101;
+    width: 400px;
+    height: 200px;
+    background-color: rgba(87, 87, 87, 0.404);
+    color: #ffffff;
+    border-radius: 25px;
+    text-align: center;
+    font-size: 50px;
+    font-weight: 900;
 }

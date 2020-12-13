@@ -60,12 +60,18 @@ module.exports = (io) => {
             // sent mes
             socket.on('chatMessage', (msg) => {
                 console.log(msg);
-                io.emit('message',msg);
+                io.emit('message', msg);
             });
 
             socket.on('close', () => {
-                console.log('asd');
                 io.emit('sent_close');
+            });
+
+            socket.on('reward', (msg) => {
+                io.emit('sent_reward', msg);
+            });
+            socket.on('reward_word', (msg) => {
+                io.emit('sent_reward_word', msg);
             });
         })
     })
