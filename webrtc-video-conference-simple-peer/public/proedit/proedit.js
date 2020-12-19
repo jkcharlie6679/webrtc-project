@@ -3,6 +3,8 @@ const VerifyContainer = document.getElementById('Verify');
 const myVerify = document.getElementById('myVerify');
 const myForm = document.getElementById('myForm');
 
+
+
 let Aftername;
 
 showLoginConference()
@@ -30,6 +32,7 @@ function render(data){
     let Password = data.S_Password;
     let Birthday = data.D_Birthday;
     let Phone = data.S_Phone;
+    let Picture = data.S_Picture
 
     document.getElementById('First_Name').innerHTML = First_Name;
     document.getElementById('Last_Name').innerHTML = Last_Name;
@@ -39,6 +42,7 @@ function render(data){
     document.getElementById('Password').innerHTML = Password;
     document.getElementById('Birthday').innerHTML = Birthday;
     document.getElementById('Phone').innerHTML = Phone;
+    document.getElementById('profilePhoto').innerHTML = '<img src="data:image/png;base64,'+ Picture +'" id="photo" alt="Red dot" /><div name= "S_Picture" id="file" class="S_Picture"></div>'
 
 }
 
@@ -151,6 +155,7 @@ function editx2(){
       })
 }
 
+
 function refresh(data){
     let First_Name = data.S_First_Name;
     let Last_Name = data.S_Last_Name;
@@ -158,6 +163,7 @@ function refresh(data){
     let Password = data.S_Password;
     let Birthday = data.D_Birthday;
     let Phone = data.S_Phone;
+    let Picture = data.S_Picture;
 
     document.getElementById('E_First_Name').innerHTML = 'First_Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="S_First_Name" name="S_First_Name" placeholder="First Name" type="text" value="'+First_Name+'" required />';
     document.getElementById('E_Last_Name').innerHTML = 'Last_Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="S_Last_Name" name="S_Last_Name" placeholder="Last Name" type="text" value="'+Last_Name+'" required/>';
@@ -166,4 +172,96 @@ function refresh(data){
     document.getElementById('E_RePassword').innerHTML = 'Confirm Password<input id="S_RePassword" name="S_RePassword" placeholder="password Confirm" type="password" value="'+Password+'" required />';
     document.getElementById('E_Birthday').innerHTML = 'Birthday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="D_Birthday" name="D_Birthday" placeholder="Birthday" type="date" value="'+Birthday+'" required />';
     document.getElementById('E_Phone').innerHTML = 'Phone Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="S_Phone" name="S_Phone" placeholder="0912345678" type="text" value="'+Phone+'" required />';
-}
+    document.getElementById('profile-pic-div2').innerHTML = '<img src="data:image/png;base64,'+ Picture +'" id="photo"><input type="file" name= "S_Picture" id="file2" class="S_Picture" accept="image/jpeg" required><label for="file2" id="uploadBtn2">Choose Photo</label>'
+
+    
+    const imgDiv = document.querySelector('.profile-pic-div');
+    const imgDiv2 = document.querySelector('.profile-pic-div2');
+    const img = document.querySelector('#photo');
+    const file = document.querySelector('#file2');
+    const uploadBtn = document.querySelector('#uploadBtn2');
+
+    //if user hover on img div 
+
+    imgDiv.addEventListener('mouseenter', function(){
+        uploadBtn.style.display = "block";
+    });
+
+    //if we hover out from img div
+
+    imgDiv.addEventListener('mouseleave', function(){
+        uploadBtn.style.display = "none";
+    });
+
+
+    //if user hover on img div 
+
+    imgDiv2.addEventListener('mouseenter', function(){
+      uploadBtn.style.display = "block";
+    });
+
+    //if we hover out from img div
+
+    imgDiv2.addEventListener('mouseleave', function(){
+      uploadBtn.style.display = "none";
+    });
+    //lets work for image showing functionality when we choose an image to upload
+
+    //when we choose a foto to upload
+
+    file.addEventListener('change', function(){
+        //this refers to file
+        const choosedFile = this.files[0];
+
+        if (choosedFile) {
+
+            const reader = new FileReader(); //FileReader is a predefined function of JS
+
+            reader.addEventListener('load', function(){
+                img.setAttribute('src', reader.result);
+            });
+
+            reader.readAsDataURL(choosedFile);
+
+        }
+    });
+
+
+  }
+
+  // const imgDiv3 = document.querySelector('.profile-pic-div2');
+  // const img3 = document.querySelector('#photo');
+  // const file3 = document.querySelector('#file2');
+  // const uploadBtn3 = document.querySelector('#uploadBtn2');
+
+  //   //if user hover on img div 
+
+  //   imgDiv3.addEventListener('mouseenter', function(){
+  //     uploadBtn3.style.display = "block";
+  // });
+
+  // //if we hover out from img div
+
+  // imgDiv3.addEventListener('mouseleave', function(){
+  //     uploadBtn3.style.display = "none";
+  // });
+  // //lets work for image showing functionality when we choose an image to upload
+
+  // //when we choose a foto to upload
+
+  // file3.addEventListener('change', function(){
+  //     //this refers to file
+  //     const choosedFile = this.files[0];
+
+  //     if (choosedFile) {
+
+  //         const reader = new FileReader(); //FileReader is a predefined function of JS
+
+  //         reader.addEventListener('load', function(){
+  //             img.setAttribute('src', reader.result);
+  //         });
+
+  //         reader.readAsDataURL(choosedFile);
+
+  //     }
+  // });

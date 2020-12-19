@@ -48,6 +48,9 @@ body{
     flex: 0 1 auto;
     height: 400px;
     top: 10px;
+    border-radius: 20px;
+    -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.479);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.493);
 }
 
 .chat-container{
@@ -56,7 +59,9 @@ body{
     right: 5px;
     width: 380px;
     height: 550px;
-    border: 2px solid #16a085;
+    border: 3px solid #16a085;
+    /* border-radius: 20px; */
+    padding-bottom: 10px;
 }
 
 .chat-header{
@@ -64,6 +69,10 @@ body{
     top: 2px;
     right: 15px;
     width: 360px;
+    height: 75px;
+    text-align: center;
+    background-color: #bae3ff;
+    border-radius: 10px;
 }
 .chat-messages{
     position: absolute;
@@ -72,6 +81,7 @@ body{
     width: 350px;
     padding-left: 10px;
     overflow-y: auto;
+    
 }
 
 .chat-form-container{
@@ -175,13 +185,22 @@ nav ul li a:hover{
     border-radius: 50px;
 }
 .chat_input{
+    position: relative;
+    top: -15px;
     height: 50px;
     width: 245px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 10px;
+    padding-left: 10px;
 }
 .btn{
     height: 50px;
-    width: 60px;
+    width: 50px;
     border-radius: 10px;
+    background-color: #fff;
+    background-image: url(../images/send.png);
+    border: none;
 
 }
 .sendgift{
@@ -192,7 +211,39 @@ nav ul li a:hover{
     width: 60px;
     border-radius: 10px;
 }
+.text{
+    position: relative;
+    font-size: 16px;
+    font-weight: 700;
+    left: 20px;
+    width: 290px;
+    background-color: #aaaaaa42;
+    padding: 10px 5px;
+    border-radius: 10px;
+    top: -30px;
+}
+.text:hover{
+    -webkit-box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+}
+.message{
+    /* border: 2px solid #d44356; */
+    border-radius: 10px;
+    width: 335px;
+    height: 20px;
+    padding-top: 25px;
+    padding-bottom: 20px;
+    -webkit-transition: all 0.25s ease;
+    -o-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+}
+.message:hover{
 
+   -webkit-transform: scale(1.06);
+   -ms-transform: scale(1.06);
+   -o-transform: scale(1.06);
+   transform: scale(1.06);
+}
 /*---------------*/
 .reward{
     position: absolute;

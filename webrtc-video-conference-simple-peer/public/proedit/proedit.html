@@ -44,6 +44,9 @@
         <div class="Verify" id="Verify">
             <h1>Profile</h1>
               <form class="form" id="myVerify" action="login.html" method="POST">
+                <div class="profile-pic-div" id="profilePhoto">
+
+                </div>
                 <label>First_Name <div id="First_Name" name="First_Name"></div></label>
                 <label>Last_Name<div id="Last_Name" name="Last_Name"></div></label>
                 <label>Account&nbsp;&nbsp;&nbsp;&nbsp;<div id="Account" name="Account"></div></label>
@@ -59,6 +62,11 @@
       <div class="login-inputs" id="login-inputs">
       <h1>Edit your Profile</h1>
       <form class="form" id="myForm" action="login.html" method="PUT">
+        <div class="profile-pic-div2" id="profile-pic-div2">
+          <img src="../images/user.png" id="photo">
+          <input type="file" name= "S_Picture" id="file2" class="S_Picture" accept="image/jpeg" required>
+          <label for="file2" id="uploadBtn2">Choose Photo</label>
+        </div>
       	<label id="E_First_Name">First_Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="S_First_Name" name="S_First_Name" placeholder="First Name" type="text" required /></label>
 	  	  <label id="E_Last_Name">Last_Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="S_Last_Name" name="S_Last_Name" placeholder="Last Name" type="text" required/></label>
 	  	  <label id="E_Account">Account&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div id="S_Account" name="Account"></div></label>
@@ -73,7 +81,7 @@
     </section>
 </div>
 <!-- partial -->
-  <script src="proedit.js"></script>
+  <script src="proedit.js" defer></script>
 </body>
 </html>
 

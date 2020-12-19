@@ -2,7 +2,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>UserLogin</title>
+  <title>UserSignUP</title>
   <link rel="icon" href="../images/monkey.ico" type="image/x-icon" />
   <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet"><link rel="stylesheet" href="Signup.css">
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -38,15 +38,20 @@
     <section class="login-container">
       <div class="login-inputs" id="login-inputs">
       <h1>User Sign Up</h1>
-      <form class="form" id="myForm" action="login.html" method="POST">
+      <form class="form" id="myForm" name="myForm"  method="POST" action = "https://140.118.121.100:5000/account/Sign_up" enctype="multipart/form-data">
+        <div class="profile-pic-div">
+          <img src="../images/user.png" id="photo">
+          <input type="file" name= "S_Picture" id="file" class="S_Picture" accept="image/jpeg" value="null" required>
+          <label for="file" id="uploadBtn">Choose Photo</label>
+        </div>
       	<input id="S_First_Name" name="S_First_Name" placeholder="First Name" type="text" required />
-	  	<input id="S_Last_Name" name="S_Last_Name" placeholder="Last Name" type="text" required/>
-	  	<input id="S_Account" name="S_Account" placeholder="Example@gmail.com" type="email" required />
-	  	<input id="S_Username" name="S_Username" placeholder="nickname" type="text" required />
-	  	<input id="S_Password" name="S_Password" placeholder="password" type="password" required />
-		<input id="S_RePassword" name="S_RePassword" placeholder="password" type="password" required />
-		<input id="D_Birthday" name="D_Birthday" placeholder="Birthday" type="date" required />
-	  	<input id="S_Phone" name="S_Phone" placeholder="0912345678" type="text" required />
+        <input id="S_Last_Name" name="S_Last_Name" placeholder="Last Name" type="text" required/>
+        <input id="S_Account" name="S_Account" placeholder="Example@gmail.com" type="email" required />
+        <input id="S_Username" name="S_Username" placeholder="nickname" type="text" required />
+        <input id="S_Password" name="S_Password" placeholder="password" type="password" required />
+        <input id="S_RePassword" name="S_RePassword" placeholder="password" type="password" required />
+        <input id="D_Birthday" name="D_Birthday" placeholder="Birthday" type="date" required />
+        <input id="S_Phone" name="S_Phone" placeholder="0912345678" type="text" required />
       	<button>Sign Up</button>
       </form>
       <a class="forget" href="../Livehome/Livehome.html">Do you have an account？ Click here to Login！</a>
@@ -54,7 +59,7 @@
 	  
 	  <div class="Verify" id="Verify">
 		<h1>User Verify</h1>
-      	<form class="form" id="myVerify" action="login.html" method="POST">
+      	<form class="form" id="myVerify" name="myVerify" method="PUT" action="https://140.118.121.100:5000/account/Verify" enctype="multipart/form-data">
       	<input id="S_Verifiy" name="S_Verifiy" placeholder="Verifiy Code" type="text" required />
       	<button>Verify</button>
       	</form>

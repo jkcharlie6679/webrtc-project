@@ -343,7 +343,7 @@ socket.on('sent_close', () =>{
 
 chatForm.addEventListener('submit',(e) =>{
     e.preventDefault();
-    const msg = new Date().Format("hh:mm") + ' ' + userName + ' :' + e.target.elements.msg.value;
+    const msg = '<img src="../images/checked.png">' +new Date().Format("hh:mm") + ' ' + userName + ' :<br>' + e.target.elements.msg.value;
     e.target.elements.msg.value = ''
     socket.emit('chatMessage', msg);
 });

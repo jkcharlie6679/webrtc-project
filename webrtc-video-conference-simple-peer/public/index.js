@@ -1,4 +1,18 @@
 fetch('https://140.118.121.100:5000/account/open_list',{
+  method: 'GET',
+  headers: {
+    'Accept': 'application/json, text/plain',
+    'Content-Type': 'application/json'
+  }
+}).then(response => {
+  return response.json()
+}) 
+.then( (source) =>{
+  list(source)
+})
+
+setInterval(function(){
+  fetch('https://140.118.121.100:5000/account/open_list',{
     method: 'GET',
     headers: {
       'Accept': 'application/json, text/plain',
@@ -10,9 +24,11 @@ fetch('https://140.118.121.100:5000/account/open_list',{
   .then( (source) =>{
     list(source)
   })
+},5000)
+
 
 function list(source){
-  console.log(source)
+  // console.log(source)
   let output = ``;
   for(var i=0;i < source.length ; i++){
     output +=`
@@ -32,16 +48,16 @@ function InsideRoom(data){
 
 
 if(window.sessionStorage.getItem("Username") != null){
-    let username = window.sessionStorage.getItem("Username");
+
     let output = ``;
     output +=`
         <li><form id="livenow"><button>Live Now</button></form></li>
         <li><a href="./index.html">Home</a></li>
         <li id="userpro"><a href="./Signup/Signup.html">Sign Up</a></li>
-        <li><a href="./Livehome/Livehome.html" id="logout">Logout</li>
+        <li><a href="./Livehome/Livehome.html" id="logout"><img src="./images/logout.png"></li>
     ` 
     document.getElementById('afterlogin').innerHTML = output;
-    document.getElementById('userpro').innerHTML = '<a href="./proedit/proedit.html"><img class="profile" src="./images/account.png">'+username+'</a>';
+    document.getElementById('userpro').innerHTML = '<a href="./proedit/proedit.html" id="Profile"></a>';
 }
 
 const logout = document.getElementById('logout');
@@ -57,7 +73,7 @@ Livenow.addEventListener('submit', function (e) {
     e.preventDefault();
     let account = window.sessionStorage.getItem("Account");
 
-    let param = "https://140.118.121.100:5000/account/open?S_Account="+account;
+    let param = "https://140.118.121.100:5000/account/open_room?S_Account="+account;
     console.log(param);
     fetch(param,{
         method: 'GET',
@@ -84,4 +100,28 @@ function render(data){
     setTimeout(function(){
       window.location.href="./Streamroom/Streamroom.html"}
       ,1000);
+  }
+
+
+  let S_Account = window.sessionStorage.getItem("Account");
+
+  let param = "https://140.118.121.100:5000/account/edit?S_Account="+S_Account
+  fetch(param,{
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json, text/plain',
+        'Content-Type': 'application/json'
+      }
+    }).then(response => {
+      return response.json()
+    }) 
+    .then( (data) =>{
+      render(data)
+    })
+  
+  function render(data){
+      let Picture = data.S_Picture
+      let username = window.sessionStorage.getItem("Username");
+      document.getElementById('Profile').innerHTML = '<img src="data:image/png;base64,'+ Picture +'" id="photo" alt="Red dot" />'+username
+  
   }
