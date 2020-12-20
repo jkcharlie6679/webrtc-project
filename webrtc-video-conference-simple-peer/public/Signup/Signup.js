@@ -67,29 +67,6 @@ function render(data){
                 showConfirmButton: false});
               
             })
-      // fetch('https://140.118.121.100:5000/account/Verify ',{
-      //   method: 'PUT',
-      //   headers: {
-      //   'Accept': 'application/json, text/plain',
-      //   'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify({
-      //     S_Verifiy_Status : "1",
-      //     S_Account : Account
-      //   })
-      //   }).then(res => {
-      //     return res.json()
-      //     }
-      //     )
-      //     .then( (user) =>{
-      //       var x = user;
-      //       setTimeout(function(){
-      //         window.location.replace('../Livehome/Livehome.html');
-      //        },3000);
-      //        swal("Success", "Verify successfully!", "success", {timer: 2000,
-      //         showConfirmButton: false});
-            
-      //     })
       }
       else{
         swal("Failed", "Verify Code is wrong", "error", {timer: 2000,

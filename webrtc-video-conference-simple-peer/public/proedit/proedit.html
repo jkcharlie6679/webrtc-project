@@ -45,7 +45,6 @@
             <h1>Profile</h1>
               <form class="form" id="myVerify" action="login.html" method="POST">
                 <div class="profile-pic-div" id="profilePhoto">
-
                 </div>
                 <label>First_Name <div id="First_Name" name="First_Name"></div></label>
                 <label>Last_Name<div id="Last_Name" name="Last_Name"></div></label>
@@ -61,10 +60,10 @@
 
       <div class="login-inputs" id="login-inputs">
       <h1>Edit your Profile</h1>
-      <form class="form" id="myForm" action="login.html" method="PUT">
-        <div class="profile-pic-div2" id="profile-pic-div2">
-          <img src="../images/user.png" id="photo">
-          <input type="file" name= "S_Picture" id="file2" class="S_Picture" accept="image/jpeg" required>
+      <form class="form" id="myForm" name="myForm"  method="PUT" action = "https://140.118.121.100:5000/account/edit" enctype="multipart/form-data">
+        <div class="profile-pic-div2" id="profilePhoto2">
+          <img src="../images/user.png" id="photo2">
+          <input type="file" name= "S_Picture" id="file2" class="S_Picture2" accept="image/jpeg" value="null" required>
           <label for="file2" id="uploadBtn2">Choose Photo</label>
         </div>
       	<label id="E_First_Name">First_Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="S_First_Name" name="S_First_Name" placeholder="First Name" type="text" required /></label>

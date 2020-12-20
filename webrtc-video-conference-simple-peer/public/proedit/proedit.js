@@ -1,8 +1,9 @@
 const LoginContainer = document.getElementById('login-inputs');
 const VerifyContainer = document.getElementById('Verify');
-const myVerify = document.getElementById('myVerify');
-const myForm = document.getElementById('myForm');
+const ProfileContainer = document.getElementById('profilePhoto');
 
+const myVerify = document.getElementById('myVerify');
+const myFormList = document.getElementById('myForm');
 
 
 let Aftername;
@@ -51,17 +52,13 @@ myVerify.addEventListener('submit',function (e){
     showVerifyConference();
 })
 
-myForm.addEventListener('submit', function (e) {
+myFormList.addEventListener('submit', function (e) {
     e.preventDefault();
 
 
-    let S_First_Name = document.getElementById('S_First_Name').value;
-    let S_Last_Name = document.getElementById('S_Last_Name').value;
     let S_Username = document.getElementById('S_Username').value;
     let S_Password = document.getElementById('S_Password').value;
     let S_RePassword = document.getElementById('S_RePassword').value;
-    let D_Birthday = document.getElementById('D_Birthday').value;
-    let S_Phone = document.getElementById('S_Phone').value;
     let Saccount = window.sessionStorage.getItem("Account");
 
     Aftername=S_Username;
@@ -71,28 +68,38 @@ myForm.addEventListener('submit', function (e) {
         showConfirmButton: false});
     }
     else{
-    fetch('https://140.118.121.100:5000/account/edit ',{
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/json, text/plain',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        S_First_Name:S_First_Name,
-        S_Last_Name:S_Last_Name,
-        S_Account:Saccount,
-        S_Username:S_Username,
-        S_Password:S_Password,
-        D_Birthday:D_Birthday,
-        S_Phone:S_Phone
-      })
-    }).then(response => {
-      return response.json()
-    }) 
-    .then( (data) =>{
-      fresh(data)
-    })
-  }
+      var formdata = new FormData(document.getElementById('myForm'));
+      formdata.append("S_Account",Saccount)
+      fetch("https://140.118.121.100:5000/account/edit",{
+            method: 'PUT',
+            body: formdata
+          })
+          .then(response => {return response.json()}) 
+          .then( (data) =>{fresh(data)})
+          .catch(error => console.log('error', error));
+
+    //   fetch('https://140.118.121.100:5000/account/edit ',{
+    //     method: 'PUT',
+    //     headers: {
+    //       'Accept': 'application/json, text/plain',
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //       S_First_Name:S_First_Name,
+    //       S_Last_Name:S_Last_Name,
+    //       S_Account:Saccount,
+    //       S_Username:S_Username,
+    //       S_Password:S_Password,
+    //       D_Birthday:D_Birthday,
+    //       S_Phone:S_Phone
+    //     })
+    //   }).then(response => {
+    //     return response.json()
+    //   }) 
+    //   .then( (data) =>{
+    //     fresh(data)
+    //   })
+    }
 });
 
 function fresh(data){
@@ -134,6 +141,7 @@ function showLoginConference() {
 function showVerifyConference() {
     LoginContainer.style = 'display: block'
     VerifyContainer.style = 'display: none'
+    ProfileContainer.style = 'display: none'
     document.getElementById('S_Account').innerHTML = window.sessionStorage.getItem("Account");
     editx2();
 }
@@ -156,6 +164,7 @@ function editx2(){
 }
 
 
+
 function refresh(data){
     let First_Name = data.S_First_Name;
     let Last_Name = data.S_Last_Name;
@@ -172,96 +181,36 @@ function refresh(data){
     document.getElementById('E_RePassword').innerHTML = 'Confirm Password<input id="S_RePassword" name="S_RePassword" placeholder="password Confirm" type="password" value="'+Password+'" required />';
     document.getElementById('E_Birthday').innerHTML = 'Birthday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="D_Birthday" name="D_Birthday" placeholder="Birthday" type="date" value="'+Birthday+'" required />';
     document.getElementById('E_Phone').innerHTML = 'Phone Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="S_Phone" name="S_Phone" placeholder="0912345678" type="text" value="'+Phone+'" required />';
-    document.getElementById('profile-pic-div2').innerHTML = '<img src="data:image/png;base64,'+ Picture +'" id="photo"><input type="file" name= "S_Picture" id="file2" class="S_Picture" accept="image/jpeg" required><label for="file2" id="uploadBtn2">Choose Photo</label>'
+    document.getElementById('profilePhoto2').innerHTML = '<img src="data:image/png;base64,'+ Picture +'" id="photo2"><input type="file" name= "S_Picture" id="file2" class="S_Picture2" accept="image/jpeg" required><label for="file2" id="uploadBtn2">Choose Photo</label>'
 
-    
-    const imgDiv = document.querySelector('.profile-pic-div');
-    const imgDiv2 = document.querySelector('.profile-pic-div2');
-    const img = document.querySelector('#photo');
+
+    const imgDiv = document.querySelector('.profile-pic-div2');
+    const img = document.querySelector('#photo2');
     const file = document.querySelector('#file2');
     const uploadBtn = document.querySelector('#uploadBtn2');
 
-    //if user hover on img div 
-
     imgDiv.addEventListener('mouseenter', function(){
-        uploadBtn.style.display = "block";
-    });
-
-    //if we hover out from img div
-
-    imgDiv.addEventListener('mouseleave', function(){
-        uploadBtn.style.display = "none";
-    });
-
-
-    //if user hover on img div 
-
-    imgDiv2.addEventListener('mouseenter', function(){
       uploadBtn.style.display = "block";
-    });
-
-    //if we hover out from img div
-
-    imgDiv2.addEventListener('mouseleave', function(){
-      uploadBtn.style.display = "none";
-    });
-    //lets work for image showing functionality when we choose an image to upload
-
-    //when we choose a foto to upload
-
-    file.addEventListener('change', function(){
-        //this refers to file
-        const choosedFile = this.files[0];
-
-        if (choosedFile) {
-
-            const reader = new FileReader(); //FileReader is a predefined function of JS
-
-            reader.addEventListener('load', function(){
-                img.setAttribute('src', reader.result);
-            });
-
-            reader.readAsDataURL(choosedFile);
-
-        }
-    });
-
+      });
+  
+      imgDiv.addEventListener('mouseleave', function(){
+          uploadBtn.style.display = "none";
+      });
+  
+      file.addEventListener('change', function(){
+          const choosedFile = this.files[0];
+  
+          if (choosedFile) {
+  
+              const reader = new FileReader(); 
+  
+              reader.addEventListener('load', function(){
+                  img.setAttribute('src', reader.result);
+              });
+  
+              reader.readAsDataURL(choosedFile);
+          }
+      });
 
   }
 
-  // const imgDiv3 = document.querySelector('.profile-pic-div2');
-  // const img3 = document.querySelector('#photo');
-  // const file3 = document.querySelector('#file2');
-  // const uploadBtn3 = document.querySelector('#uploadBtn2');
-
-  //   //if user hover on img div 
-
-  //   imgDiv3.addEventListener('mouseenter', function(){
-  //     uploadBtn3.style.display = "block";
-  // });
-
-  // //if we hover out from img div
-
-  // imgDiv3.addEventListener('mouseleave', function(){
-  //     uploadBtn3.style.display = "none";
-  // });
-  // //lets work for image showing functionality when we choose an image to upload
-
-  // //when we choose a foto to upload
-
-  // file3.addEventListener('change', function(){
-  //     //this refers to file
-  //     const choosedFile = this.files[0];
-
-  //     if (choosedFile) {
-
-  //         const reader = new FileReader(); //FileReader is a predefined function of JS
-
-  //         reader.addEventListener('load', function(){
-  //             img.setAttribute('src', reader.result);
-  //         });
-
-  //         reader.readAsDataURL(choosedFile);
-
-  //     }
-  // });
