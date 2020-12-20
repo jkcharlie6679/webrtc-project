@@ -337,7 +337,7 @@ socket.on('message', message=>{
 
 
 socket.on('sent_close', () =>{
-    document.getElementById("logo_title").innerHTML = " The room is close ! See you next time";
+    document.getElementById("logo_title").innerHTML = " The room has closed ! See you next time";
 });
 
 
