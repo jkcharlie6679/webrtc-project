@@ -44,11 +44,12 @@ function render(data){
     document.getElementById('Birthday').innerHTML = Birthday;
     document.getElementById('Phone').innerHTML = Phone;
     document.getElementById('profilePhoto').innerHTML = '<img src="data:image/png;base64,'+ Picture +'" id="photo" alt="Red dot" /><div name= "S_Picture" id="file" class="S_Picture"></div>'
-    var ImageURL = "data:image/jpg,base64,"+ Picture
-    // var block = ImageURL.split(";")
-    var contentType = "image/jpg";
-    var realData =  Picture;
-    var blob = b64toBlob(realData);
+    // var ImageURL = "data:image/jpg,base64,"+ Picture
+    // // var block = ImageURL.split(";")
+    // var contentType = "image/jpg";
+    // var realData =  Picture;
+    // var blob = b64toBlob(realData);
+    var blob = atob(Picture);
     window.sessionStorage.setItem("blob",blob);
 
 }
@@ -76,7 +77,7 @@ myFormList.addEventListener('submit', function (e) {
     else{
       var formdata = new FormData(document.getElementById('myForm'));
       formdata.append("S_Account",Saccount)
-      // formdata.append()
+      formdata.append("S_Picture",window.sessionStorage.getItem("blob"))
       fetch("https://140.118.121.100:5000/account/edit",{
             method: 'PUT',
             body: formdata
@@ -188,7 +189,7 @@ function refresh(data){
     // document.getElementById('E_RePassword').innerHTML = 'Confirm Password<input id="S_RePassword" name="S_RePassword" placeholder="password Confirm" type="password" value="'+Password+'" required />';
     document.getElementById('E_Birthday').innerHTML = 'Birthday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="D_Birthday" name="D_Birthday" placeholder="Birthday" type="date" value="'+Birthday+'" required />';
     document.getElementById('E_Phone').innerHTML = 'Phone Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="S_Phone" name="S_Phone" placeholder="0912345678" type="text" value="'+Phone+'" required />';
-    document.getElementById('profilePhoto2').innerHTML = '<img src="data:image/png;base64,'+ Picture +'" id="photo2"><input type="file" name= "S_Picture" id="file2" class="S_Picture2" accept="image/jpeg" required><label for="file2" id="uploadBtn2">Choose Photo</label>'
+    document.getElementById('profilePhoto2').innerHTML = '<img src="data:image/png;base64,'+ Picture +'" id="photo2"><input type="file" name= "S_Picture" id="file2" class="S_Picture2" accept="image/jpeg"><label for="file2" id="uploadBtn2">Choose Photo</label>'
 
 
     const imgDiv = document.querySelector('.profile-pic-div2');
