@@ -11,3 +11,12 @@ services:
        - /home/zhongyu/webrtc_data:/home/zhongyu/webrtc_data
     restart: always
     command: "python3 api.py"
+  server:
+    expose:
+      - "3012"
+    build: server
+    container_name: server
+    ports:
+      - "3012:3012"
+    restart: always
+    command: "node ./src/app.js"
