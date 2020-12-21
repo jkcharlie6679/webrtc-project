@@ -1,0 +1,13 @@
+version: "3"
+services:
+  streaming:
+    expose:
+      - "5000"
+    build: .
+    container_name: api
+    ports:
+      - "5000:5000"
+    volumes:
+       - /home/zhongyu/webrtc_data:/home/zhongyu/webrtc_data
+    restart: always
+    command: "python3 api.py"
