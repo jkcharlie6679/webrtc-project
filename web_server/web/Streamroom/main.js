@@ -73,11 +73,12 @@ const configuration = {
  */
 let constraints = {
     audio: true,
-    video: {
-        width: 300,
-        height: 300
-    }
+     video: {
+         width: {exact:1280},
+         height: {exact:720}
+     }
 }
+
 
 /////////////////////////////////////////////////////////
 
