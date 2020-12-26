@@ -58,7 +58,7 @@ function render(data){
 
   if(market == '0')
   {
-    swal("Success", "Login Successfully！", "success", {timer: 1000
+    swal("Success", "Login Successfully!", "success", {timer: 1000
       ,showConfirmButton: false});
     window.sessionStorage.setItem("Username", data.S_Username);
     window.sessionStorage.setItem("Account", data.S_Account);
