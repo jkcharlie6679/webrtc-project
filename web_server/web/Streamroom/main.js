@@ -621,7 +621,7 @@ function PlayMusic(){
     
     document.getElementById("audio").innerHTML = '<audio src="../images/Music/rootsound.mp3" autoplay controls></audio>'
     setTimeout(function(){
-        
+        musictext.style = 'display:block;'
     },27430)
     setTimeout(function(){
         document.getElementById("musictext").innerHTML = "<p>半夜睡不著覺 把心情哼成歌</p><br>"
