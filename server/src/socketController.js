@@ -73,6 +73,9 @@ module.exports = (io) => {
             socket.on('reward_word', (msg) => {
                 io.emit('sent_reward_word', msg);
             });
+            socket.on('music', () => {
+                io.emit('play_music');
+            });
         })
     })
 }

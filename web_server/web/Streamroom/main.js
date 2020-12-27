@@ -310,7 +310,6 @@ function toggleMute() {
         localStream.getAudioTracks()[index].enabled = !localStream.getAudioTracks()[index].enabled
         muteButton.innerText = localStream.getAudioTracks()[index].enabled ? "Unmuted" : "Muted"
     }
-    console.log("aaa")
 }
 /**
  * Enable/disable video
@@ -320,7 +319,6 @@ function toggleVid() {
         localStream.getVideoTracks()[index].enabled = !localStream.getVideoTracks()[index].enabled
         vidButton.innerText = localStream.getVideoTracks()[index].enabled ? "Video Enabled" : "Video Disabled"
     }
-    console.log("ddd")
 }
 
 /**
@@ -616,9 +614,11 @@ function changeuniverse(){
 // setInterval(function(){
 //     document.getElementById("musictext").innerHTML = Date.now()
 // },1)
-
 function PlayMusic(){
-    
+    socket.emit('music');
+}
+socket.on('play_music', ()=>{
+    console.log('play_music');
     document.getElementById("audio").innerHTML = '<audio src="../images/Music/rootsound.mp3" autoplay controls></audio>'
     setTimeout(function(){
         musictext.style = 'display:block;'
@@ -768,4 +768,4 @@ function PlayMusic(){
     setTimeout(function(){
         musictext.style = 'display:none;'
     },315550)
-}
+});
