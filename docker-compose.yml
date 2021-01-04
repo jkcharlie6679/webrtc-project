@@ -2,11 +2,11 @@ version: "3"
 services:
   streaming:
     expose:
-      - "5000"
+      - "6789"
     build: API
     container_name: api
     ports:
-      - "5000:5000"
+      - "6789:6789"
     volumes:
        - /home/zhongyu/webrtc_data:/home/zhongyu/webrtc_data
     restart: always
