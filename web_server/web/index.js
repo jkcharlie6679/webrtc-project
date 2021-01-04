@@ -1,4 +1,4 @@
-fetch('https://140.118.121.100:5000/account/open_list',{
+fetch('https://140.118.121.100:6789/account/open_list',{
   method: 'GET',
   headers: {
     'Accept': 'application/json, text/plain',
@@ -12,7 +12,7 @@ fetch('https://140.118.121.100:5000/account/open_list',{
 })
 
 setInterval(function(){
-  fetch('https://140.118.121.100:5000/account/open_list',{
+  fetch('https://140.118.121.100:6789/account/open_list',{
     method: 'GET',
     headers: {
       'Accept': 'application/json, text/plain',
@@ -80,7 +80,7 @@ const Livenow = document.getElementById('livenow')
 Livenow.addEventListener('submit', function (e) {
     e.preventDefault();
     let account = window.sessionStorage.getItem("Account");
-    let param = "https://140.118.121.100:5000/account/open_room?S_Account="+account;
+    let param = "https://140.118.121.100:6789/account/open_room?S_Account="+account;
     console.log(param);
 
 
@@ -112,7 +112,7 @@ function openroom(data){
 
   let S_Account = window.sessionStorage.getItem("Account");
 
-  let param = "https://140.118.121.100:5000/account/edit?S_Account="+S_Account
+  let param = "https://140.118.121.100:6789/account/edit?S_Account="+S_Account
   fetch(param,{
       method: 'GET',
       headers: {

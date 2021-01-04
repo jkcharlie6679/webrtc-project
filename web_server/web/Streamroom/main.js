@@ -334,13 +334,17 @@ function updateButtons() {
 }
 
 socket.on('message', message=>{
-    console.log(message);
-    outputMessage(message);
+    // console.log(message);
+    if(message[0] == window.sessionStorage.getItem("roomid")){
+        outputMessage(message[1]);
+    }
 });
 
 
-socket.on('sent_close', () =>{
-    document.getElementById("logo_title").innerHTML = " The room has closed ! See you next time";
+socket.on('sent_close', (msg) =>{
+    if(msg ==  window.sessionStorage.getItem("roomid")){
+        document.getElementById("logo_title").innerHTML = " The room has closed ! See you next time";
+    }
 });
 
 
@@ -348,8 +352,9 @@ chatForm.addEventListener('submit',(e) =>{
     e.preventDefault();
     const msg = '<img src="../images/checked.png">' +new Date().Format("hh:mm") + ' ' + userName + ' :<br>' + e.target.elements.msg.value;
     e.target.elements.msg.value = ''
-    socket.emit('chatMessage', msg);
-
+    idmsg = [window.sessionStorage.getItem("roomid"), msg]
+    console.log(idmsg[1])
+    socket.emit('chatMessage', idmsg);
 });
 
 function outputMessage(message) {
@@ -367,10 +372,10 @@ setTimeout(function(){
     ,2000);
 
 function msg_send(msg){
-    socket.emit('chatMessage', msg);
+    idmsg = [window.sessionStorage.getItem("roomid"), msg]
+    socket.emit('chatMessage', idmsg);
 }
 
-// socket.emit('chatMessage', 'asd');
 roomidentity()
 function roomidentity(){
     let identity  = window.sessionStorage.getItem("people");
@@ -389,7 +394,7 @@ Closestream.addEventListener('submit', function (e) {
     e.preventDefault();
     let account = window.sessionStorage.getItem("Account");
 
-    let param = "https://140.118.121.100:5000/account/close?S_Account="+account;
+    let param = "https://140.118.121.100:6789/account/close?S_Account="+account;
     console.log(param);
     fetch(param,{
         method: 'GET',
@@ -411,7 +416,8 @@ function close(data){
     setTimeout(function(){
       window.location.href="../index.html"}
       ,2000);
-    socket.emit('close');
+    idmsg = window.sessionStorage.getItem("roomid")
+    socket.emit('close', idmsg);
 }
 
 
@@ -488,126 +494,148 @@ function showreward(){
 
 socket.on('sent_reward', (message)=>{
     // console.log(message);
-    if(message === 'car'){
-        carContainer.style='display:block';
-        setTimeout(function(){
-            carContainer.style='display:none';
-        },5000)
-    }
-    if(message === 'arrow'){
-        arrowContainer.style='display:block';
-        setTimeout(function(){
-            arrowContainer.style='display:none';
-        },5000)
-    }
-    if(message === 'diamond'){
-        diamondContainer.style='display:block';
-        setTimeout(function(){
-            diamondContainer.style='display:none';
-        },5000)
-    }
-    if(message === 'dove'){
-        doveContainer.style='display:block';
-        setTimeout(function(){
-            doveContainer.style='display:none';
-        },5000)
-    }
-    if(message === 'gift'){
-        giftContainer.style='display:block';
-        setTimeout(function(){
-            giftContainer.style='display:none';
-        },5000)
-    }
-    if(message === 'microphone'){
-        microphoneContainer.style='display:block';
-        setTimeout(function(){
-            microphoneContainer.style='display:none';
-        },5000)
-    }
-    if(message === 'rocket'){
-        rocketContainer.style='display:block';
-        setTimeout(function(){
-            rocketContainer.style='display:none';
-        },5000)
-    }
-    if(message === 'teddy'){
-        teddyContainer.style='display:block';
-        setTimeout(function(){
-            teddyContainer.style='display:none';
-        },5000)
-    }
-    if(message === 'treature'){
-        treatureContainer.style='display:block';
-        setTimeout(function(){
-            treatureContainer.style='display:none';
-        },5000)
-    }
-    if(message === 'universe'){
-        universeContainer.style='display:block';
-        setTimeout(function(){
-            universeContainer.style='display:none';
-        },5000)
+    if(message[0] == window.sessionStorage.getItem("roomid")){
+        if(message[1] === 'car'){
+            carContainer.style='display:block';
+            setTimeout(function(){
+                carContainer.style='display:none';
+            },5000)
+        }
+        if(message[1] === 'arrow'){
+            arrowContainer.style='display:block';
+            setTimeout(function(){
+                arrowContainer.style='display:none';
+            },5000)
+        }
+        if(message[1] === 'diamond'){
+            diamondContainer.style='display:block';
+            setTimeout(function(){
+                diamondContainer.style='display:none';
+            },5000)
+        }
+        if(message[1] === 'dove'){
+            doveContainer.style='display:block';
+            setTimeout(function(){
+                doveContainer.style='display:none';
+            },5000)
+        }
+        if(message[1] === 'gift'){
+            giftContainer.style='display:block';
+            setTimeout(function(){
+                giftContainer.style='display:none';
+            },5000)
+        }
+        if(message[1] === 'microphone'){
+            microphoneContainer.style='display:block';
+            setTimeout(function(){
+                microphoneContainer.style='display:none';
+            },5000)
+        }
+        if(message[1] === 'rocket'){
+            rocketContainer.style='display:block';
+            setTimeout(function(){
+                rocketContainer.style='display:none';
+            },5000)
+        }
+        if(message[1] === 'teddy'){
+            teddyContainer.style='display:block';
+            setTimeout(function(){
+                teddyContainer.style='display:none';
+            },5000)
+        }
+        if(message[1] === 'treature'){
+            treatureContainer.style='display:block';
+            setTimeout(function(){
+                treatureContainer.style='display:none';
+            },5000)
+        }
+        if(message[1] === 'universe'){
+            universeContainer.style='display:block';
+            setTimeout(function(){
+                universeContainer.style='display:none';
+            },5000)
+        }
     }
 });
 socket.on('sent_reward_word', (message)=>{
     // console.log(message);
-    GiftMessageContainer.style = 'display:block;';
-    document.getElementById("GiftMessage").innerHTML = message;
-    setTimeout(function(){
-        GiftMessageContainer.style = 'display:none;';
-    },5000)
-    
+    if(message[0] == window.sessionStorage.getItem("roomid")){
+        GiftMessageContainer.style = 'display:block;';
+        document.getElementById("GiftMessage").innerHTML = message[1];
+        setTimeout(function(){
+            GiftMessageContainer.style = 'display:none;';
+        },5000)
+    }
     
 });
 
 function changecar(){
-    socket.emit('reward', 'car');
-    socket.emit('reward_word', userName + ' send a car to ' + window.sessionStorage.getItem("identity"));
+    idcar = [window.sessionStorage.getItem("roomid"), 'car']
+    socket.emit('reward', idcar);
+    idmsg = [window.sessionStorage.getItem("roomid"), userName + ' send a car to ' + window.sessionStorage.getItem("identity")]
+    socket.emit('reward_word', idmsg);
     msg_send(new Date().Format("hh:mm") + ' ' + userName + ' send a car to ' + window.sessionStorage.getItem("identity"));
 }
 function changearrow(){
-    socket.emit('reward', 'arrow');
-    socket.emit('reward_word', userName + ' send a arrow to ' + window.sessionStorage.getItem("identity"));
+    idarrow = [window.sessionStorage.getItem("roomid"), 'arrow']
+    socket.emit('reward', idarrow);
+    idmsg = [window.sessionStorage.getItem("roomid"), userName + ' send a arrow to ' + window.sessionStorage.getItem("identity")]
+    socket.emit('reward_word', idmsg);
     msg_send(new Date().Format("hh:mm") + ' ' + userName + ' send a arrow to ' + window.sessionStorage.getItem("identity"));
 }
 function changediamond(){
-    socket.emit('reward', 'diamond');
-    socket.emit('reward_word', userName + ' send a diamond to ' + window.sessionStorage.getItem("identity"));
+    iddiamond = [window.sessionStorage.getItem("roomid"), 'diamond']
+    socket.emit('reward', iddiamond);
+    idmsg = [window.sessionStorage.getItem("roomid"), userName + ' send a diamond to ' + window.sessionStorage.getItem("identity")]
+    socket.emit('reward_word', idmsg);
     msg_send(new Date().Format("hh:mm") + ' ' + userName + ' send a diamond to ' + window.sessionStorage.getItem("identity"));
 }
 function changedove(){
-    socket.emit('reward', 'dove');
-    socket.emit('reward_word', userName + ' send a dove to ' + window.sessionStorage.getItem("identity"));
+    iddove = [window.sessionStorage.getItem("roomid"), 'dove']
+    socket.emit('reward', iddove);
+    idmsg = [window.sessionStorage.getItem("roomid"), userName + ' send a dove to ' + window.sessionStorage.getItem("identity")]
+    socket.emit('reward_word', idmsg);
     msg_send(new Date().Format("hh:mm") + ' ' + userName + ' send a dove to ' + window.sessionStorage.getItem("identity"));
 }
 function changegift(){
-    socket.emit('reward', 'gift');
-    socket.emit('reward_word', userName + ' send a gift to ' + window.sessionStorage.getItem("identity"));
+    idgift = [window.sessionStorage.getItem("roomid"), 'gist']
+    socket.emit('reward', idgift);
+    idmsg = [window.sessionStorage.getItem("roomid"), userName + ' send a gift to ' + window.sessionStorage.getItem("identity")]
+    socket.emit('reward_word', idmsg);
     msg_send(new Date().Format("hh:mm") + ' ' + userName + ' send a gift to ' + window.sessionStorage.getItem("identity"));
 }
 function changemicrophone(){
-    socket.emit('reward', 'microphone');
-    socket.emit('reward_word', userName + ' send a microphone to ' + window.sessionStorage.getItem("identity"));
+    idmicrophone = [window.sessionStorage.getItem("roomid"), 'microphone']
+    socket.emit('reward', idmicrophone);
+    idmsg = [window.sessionStorage.getItem("roomid"),  userName + ' send a microphone to ' + window.sessionStorage.getItem("identity")]
+    socket.emit('reward_word', idmsg);
     msg_send(new Date().Format("hh:mm") + ' ' + userName + ' send a microphone to ' + window.sessionStorage.getItem("identity"));
 }
 function changerocket(){
-    socket.emit('reward', 'rocket');
-    socket.emit('reward_word', userName + ' send a rocket to ' + window.sessionStorage.getItem("identity"));
+    idrocket = [window.sessionStorage.getItem("roomid"), 'rocket']
+    socket.emit('reward', idrocket);
+    idmsg = [window.sessionStorage.getItem("roomid"), userName + ' send a rocket to ' + window.sessionStorage.getItem("identity")]
+    socket.emit('reward_word', idmsg);
     msg_send(new Date().Format("hh:mm") + ' ' + userName + ' send a rocket to ' + window.sessionStorage.getItem("identity"));
 }
 function changeteddy(){
-    socket.emit('reward', 'teddy');
-    socket.emit('reward_word', userName + ' send a teddy to ' + window.sessionStorage.getItem("identity"));
+    idteddy = [window.sessionStorage.getItem("roomid"), 'teddy']
+    socket.emit('reward', idteddy);
+    socket.emit('reward_word', idmsg);
     msg_send(new Date().Format("hh:mm") + ' ' + userName + ' send a teddy to ' + window.sessionStorage.getItem("identity"));
 }
 function changetreature(){
-    socket.emit('reward', 'treature');
-    socket.emit('reward_word', userName + ' send a treature to ' + window.sessionStorage.getItem("identity"));
+    idtreature = [window.sessionStorage.getItem("roomid"), 'treature']
+    socket.emit('reward', idtreature);
+    idmsg = [window.sessionStorage.getItem("roomid"), userName + ' send a treature to ' + window.sessionStorage.getItem("identity")]
+    socket.emit('reward_word', idmsg);
     msg_send(new Date().Format("hh:mm") + ' ' + userName + ' send a treature to ' + window.sessionStorage.getItem("identity"));
 }
 function changeuniverse(){
-    socket.emit('reward', 'universe');
-    socket.emit('reward_word', userName + ' send a universe to ' + window.sessionStorage.getItem("identity"));
+    iduniverse = [window.sessionStorage.getItem("roomid"), 'universe']
+    socket.emit('reward', iduniverse);
+    idmsg = [window.sessionStorage.getItem("roomid"), userName + ' send a universe to ' + window.sessionStorage.getItem("identity")]
+    socket.emit('reward_word',idmsg);
     msg_send(new Date().Format("hh:mm") + ' ' + userName + ' send a universe to ' + window.sessionStorage.getItem("identity"));
 }
 // musictext.style = 'display:block;'
@@ -615,157 +643,160 @@ function changeuniverse(){
 //     document.getElementById("musictext").innerHTML = Date.now()
 // },1)
 function PlayMusic(){
-    socket.emit('music');
+    idmusic = window.sessionStorage.getItem("roomid")
+    socket.emit('music', idmusic);
 }
-socket.on('play_music', ()=>{
-    console.log('play_music');
-    document.getElementById("audio").innerHTML = '<audio src="../images/Music/rootsound.mp3" autoplay controls></audio>'
-    setTimeout(function(){
-        musictext.style = 'display:block;'
-    },27430)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>半夜睡不著覺 把心情哼成歌</p><br>"
-    },29430)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>只好到屋頂找另一個夢境</p><br>"
-    },35340)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>睡夢中被敲醒　我還是不確定</p><br>"
-    },46060)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>怎會有動人旋律在對面的屋頂</p><br>"
-    },51620)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>我悄悄關上門　帶著希望上去</p><br>"
-    },57180)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>原來是我夢裡常出現的那個人</p><br>"
-    },62520)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>那個人不就是我夢裡那模糊的人</p><br>"
-    },67750)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>我們有同樣的默契　用天線</p><br>"
-    },72400)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>用天線　排成愛你的形狀 Ho ~ Ho ~</p><br>"
-    },78360)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>在屋頂唱著你的歌</p><br>"
-    },87030)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>在屋頂和我愛的人</p><br>"
-    },90000)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>讓星星點綴成 最浪漫的夜晚</p><br>"
-    },92610)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>擁抱這時刻　這一分一秒全都停止</p><br>"
-    },98660)
+socket.on('play_music', (message)=>{
+    if(message == window.sessionStorage.getItem("roomid")){
+        console.log('play_music');
+        document.getElementById("audio").innerHTML = '<audio src="../images/Music/rootsound.mp3" autoplay controls></audio>'
+        setTimeout(function(){
+            musictext.style = 'display:block;'
+        },27430)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>半夜睡不著覺 把心情哼成歌</p><br>"
+        },29430)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>只好到屋頂找另一個夢境</p><br>"
+        },35340)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>睡夢中被敲醒　我還是不確定</p><br>"
+        },46060)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>怎會有動人旋律在對面的屋頂</p><br>"
+        },51620)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>我悄悄關上門　帶著希望上去</p><br>"
+        },57180)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>原來是我夢裡常出現的那個人</p><br>"
+        },62520)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>那個人不就是我夢裡那模糊的人</p><br>"
+        },67750)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>我們有同樣的默契　用天線</p><br>"
+        },72400)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>用天線　排成愛你的形狀 Ho ~ Ho ~</p><br>"
+        },78360)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>在屋頂唱著你的歌</p><br>"
+        },87030)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>在屋頂和我愛的人</p><br>"
+        },90000)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>讓星星點綴成 最浪漫的夜晚</p><br>"
+        },92610)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>擁抱這時刻　這一分一秒全都停止</p><br>"
+        },98660)
 
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>愛開始糾結</p><br>"
-    },106990)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>在屋頂唱著你的歌</p><br>"
-    },108670)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>在屋頂和我愛的人</p><br>"
-    },111700)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>將泛黃的夜獻 給最孤獨的月</p><br>"
-    },114400)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>擁抱這時刻　這一分一秒全都停止</p><br>"
-    },120230)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>愛開始糾結 夢有你而美</p><br>"
-    },128800)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p><間奏請稍後></p>"
-    },138800)
-    
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>半夜睡不著覺　把心情哼成歌</p><br>"
-    },168690)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>只好到屋頂找另一個夢境</p><br>"
-    },174360)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>睡夢中被敲醒　我還是不確定</p><br>"
-    },185210)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>怎會有動人旋律在對面的屋頂</p><br>"
-    },190050)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>我悄悄關上門　帶著希望上去</p><br>"
-    },195560)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>原來是我夢裡常出現的那個人</p><br>"
-    },200990)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>那個人不就是我夢裡那模糊的人</p><br>"
-    },206920)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>我們有同樣的默契　用天線</p><br>"
-    },210450)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>用天線　排成愛你的形狀 Ho ~ Ho ~ </p><br>"
-    },217790)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>在屋頂唱著你的歌</p><br>"
-    },226870)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>在屋頂和我愛的人</p><br>"
-    },229800)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>讓星星點綴成 最浪漫的夜晚</p><br>"
-    },232340)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>擁抱這時刻　這一分一秒全都停止</p><br>"
-    },238410)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>愛開始糾結</p><br>"
-    },246930)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>在屋頂唱著你的歌</p><br>"
-    },248940)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>在屋頂和我愛的人</p><br>"
-    },251620)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>將泛黃的夜獻 給最孤獨的月</p><br>"
-    },254270)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>擁抱這時刻　這一分一秒全都停止</p><br>"
-    },260230)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>愛開始糾結 夢有你而美</p><br>"
-    },268490)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>愛開始糾結</p><br>"
+        },106990)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>在屋頂唱著你的歌</p><br>"
+        },108670)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>在屋頂和我愛的人</p><br>"
+        },111700)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>將泛黃的夜獻 給最孤獨的月</p><br>"
+        },114400)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>擁抱這時刻　這一分一秒全都停止</p><br>"
+        },120230)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>愛開始糾結 夢有你而美</p><br>"
+        },128800)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p><間奏請稍後></p>"
+        },138800)
+        
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>半夜睡不著覺　把心情哼成歌</p><br>"
+        },168690)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>只好到屋頂找另一個夢境</p><br>"
+        },174360)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>睡夢中被敲醒　我還是不確定</p><br>"
+        },185210)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>怎會有動人旋律在對面的屋頂</p><br>"
+        },190050)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>我悄悄關上門　帶著希望上去</p><br>"
+        },195560)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>原來是我夢裡常出現的那個人</p><br>"
+        },200990)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>那個人不就是我夢裡那模糊的人</p><br>"
+        },206920)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>我們有同樣的默契　用天線</p><br>"
+        },210450)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>用天線　排成愛你的形狀 Ho ~ Ho ~ </p><br>"
+        },217790)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>在屋頂唱著你的歌</p><br>"
+        },226870)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>在屋頂和我愛的人</p><br>"
+        },229800)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>讓星星點綴成 最浪漫的夜晚</p><br>"
+        },232340)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>擁抱這時刻　這一分一秒全都停止</p><br>"
+        },238410)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>愛開始糾結</p><br>"
+        },246930)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>在屋頂唱著你的歌</p><br>"
+        },248940)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>在屋頂和我愛的人</p><br>"
+        },251620)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>將泛黃的夜獻 給最孤獨的月</p><br>"
+        },254270)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>擁抱這時刻　這一分一秒全都停止</p><br>"
+        },260230)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>愛開始糾結 夢有你而美</p><br>"
+        },268490)
 
 
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>讓我愛你是誰 是我</p><br>"
-    },283690)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>讓你愛我是誰 是妳</p><br>"
-    },286230)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>怎會有 動人旋律環繞在我倆的身邊</p><br>"
-    },288750)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>讓我愛你是誰 是我</p><br>"
-    },294650)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>讓你愛我是誰 是妳</p><br>"
-    },297450)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p>原來是 這屋頂有美麗的邂逅</p><br>"
-    },300250)
-    setTimeout(function(){
-        document.getElementById("musictext").innerHTML = "<p class='happytext'>歡樂歌聲盡在 Swagger</p>"
-    },305550)
-    setTimeout(function(){
-        musictext.style = 'display:none;'
-    },315550)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>讓我愛你是誰 是我</p><br>"
+        },283690)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>讓你愛我是誰 是妳</p><br>"
+        },286230)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>怎會有 動人旋律環繞在我倆的身邊</p><br>"
+        },288750)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>讓我愛你是誰 是我</p><br>"
+        },294650)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>讓你愛我是誰 是妳</p><br>"
+        },297450)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p>原來是 這屋頂有美麗的邂逅</p><br>"
+        },300250)
+        setTimeout(function(){
+            document.getElementById("musictext").innerHTML = "<p class='happytext'>歡樂歌聲盡在 Swagger</p>"
+        },305550)
+        setTimeout(function(){
+            musictext.style = 'display:none;'
+        },315550)
+    }
 });

@@ -250,6 +250,6 @@ def close():
     return json.dumps(data_json), status.HTTP_200_OK
   
 
-app.run(host='0.0.0.0', debug=True, ssl_context=('certificate.crt', 'private.key') )
+app.run(host='0.0.0.0', port = 6789, debug=True, ssl_context=('certificate.crt', 'private.key') )
 # app.run(ssl_context='adhoc')
 # app.run(host='0.0.0.0', debug=True)

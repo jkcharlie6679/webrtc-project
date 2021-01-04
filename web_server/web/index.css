@@ -10,6 +10,7 @@ body{
     height: 80px;
     width: 100%;
     display: flex;
+    /* background-image: linear-gradient(to top, #7dcfff 0%, #7dcfff 100%); */
     display: inline-block;
 }
 
@@ -18,9 +19,9 @@ body{
     right: 0px;
     top: 80px;
     width: 100%;
-    min-height: 1200px;
+    min-height: 750px;
     height: auto;
-    background-image: linear-gradient(to top, #f096a4 0%, #ecb3cb 100%);
+    background-image: linear-gradient(to top, #98d9ff9a 0%, #7dcfff 100%);
     text-align: center;
     align-items: center;
 }
@@ -158,8 +159,9 @@ nav ul li a:hover{
     position: absolute;
     bottom: 0px;
     right: 0px;
-    width: 750px;
-    height: 950px;
+    width: 1280px;
+    height: 720px;
+    top: 120px;
 }
 
 .mainest_streamer{
@@ -344,8 +346,8 @@ nav3 ul li a{
     position: absolute;
     text-align: left;
     float: left;
-    top: 800px;
-    left: 100px;
+    top: 480px;
+    left: 600px;
     color: #fff;
     font-size: 72px;
     font-weight: 900;

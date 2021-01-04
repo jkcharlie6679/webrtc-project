@@ -11,7 +11,7 @@ let Aftername;
 showLoginConference()
 let S_Account = window.sessionStorage.getItem("Account");
 
-let param = "https://140.118.121.100:5000/account/edit?S_Account="+S_Account
+let param = "https://140.118.121.100:6789/account/edit?S_Account="+S_Account
 fetch(param,{
     method: 'GET',
     headers: {
@@ -78,7 +78,7 @@ myFormList.addEventListener('submit', function (e) {
       var formdata = new FormData(document.getElementById('myForm'));
       formdata.append("S_Account",Saccount)
       formdata.append("S_Picture",window.sessionStorage.getItem("blob"))
-      fetch("https://140.118.121.100:5000/account/edit",{
+      fetch("https://140.118.121.100:6789/account/edit",{
             method: 'PUT',
             body: formdata
           })
@@ -86,7 +86,7 @@ myFormList.addEventListener('submit', function (e) {
           .then( (data) =>{fresh(data)})
           .catch(error => console.log('error', error));
 
-    //   fetch('https://140.118.121.100:5000/account/edit ',{
+    //   fetch('https://140.118.121.100:6789/account/edit ',{
     //     method: 'PUT',
     //     headers: {
     //       'Accept': 'application/json, text/plain',
@@ -156,7 +156,7 @@ function showVerifyConference() {
 
 function editx2(){
     let S_Account = window.sessionStorage.getItem("Account");
-    let param = "https://140.118.121.100:5000/account/edit?S_Account="+S_Account
+    let param = "https://140.118.121.100:6789/account/edit?S_Account="+S_Account
     fetch(param,{
         method: 'GET',
         headers: {

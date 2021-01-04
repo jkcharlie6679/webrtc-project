@@ -23,7 +23,7 @@ myFormlist.addEventListener('submit', function (e) {
   }
   else{
     var formdata = new FormData(document.getElementById('myForm'));
-    fetch("https://140.118.121.100:5000/account/Sign_up",{
+    fetch("https://140.118.121.100:6789/account/Sign_up",{
           method: 'POST',
           body: formdata
         })
@@ -54,7 +54,7 @@ function render(data){
         Verifydata.append("S_Verifiy_Status","1")
         Verifydata.append("S_Account",Account)
 
-        fetch("https://140.118.121.100:5000/account/Verify",{
+        fetch("https://140.118.121.100:6789/account/Verify",{
               method: 'PUT',
               body: Verifydata
             })

@@ -33,7 +33,7 @@ myForm.addEventListener('submit', function (e) {
   
   let S_Account = document.getElementById('S_Account').value;
   let S_Password = document.getElementById('S_Password').value;
-  let test = "https://140.118.121.100:5000/account/Login?S_Account="+S_Account+"&S_Password="+S_Password;
+  let test = "https://140.118.121.100:6789/account/Login?S_Account="+S_Account+"&S_Password="+S_Password;
   // console.log(test)
   fetch(test,{
     method: 'GET',

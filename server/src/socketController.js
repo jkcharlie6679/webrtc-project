@@ -63,8 +63,8 @@ module.exports = (io) => {
                 io.emit('message', msg);
             });
 
-            socket.on('close', () => {
-                io.emit('sent_close');
+            socket.on('close', (msg) => {
+                io.emit('sent_close', msg);
             });
 
             socket.on('reward', (msg) => {
@@ -73,8 +73,8 @@ module.exports = (io) => {
             socket.on('reward_word', (msg) => {
                 io.emit('sent_reward_word', msg);
             });
-            socket.on('music', () => {
-                io.emit('play_music');
+            socket.on('music', (msg) => {
+                io.emit('play_music', msg);
             });
         })
     })
