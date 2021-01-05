@@ -25,6 +25,13 @@
     background-position: center;
     position: relative;
     overflow: hidden;
+    background-repeat:no-repeat;
+    background-position: center 0;
+    background-size:cover;
+    background-attachment:fixed;
+    transform: scale(1);
+    -webkit-background-size: cover;
+    zoom: 1;
   }
   .navbar{
     position: absolute;
