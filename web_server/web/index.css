@@ -19,11 +19,19 @@ body{
     right: 0px;
     top: 80px;
     width: 100%;
-    min-height: 750px;
-    height: auto;
-    background-image: linear-gradient(to top, #98d9ff9a 0%, #7dcfff 100%);
+    min-height: 1080px;
+    height: 100%;
+    /* background-image: linear-gradient(to top, #98d9ff9a 0%, #7dcfff 100%); */
+    background-image: url(./images/girl.jpg);
+    background-repeat:no-repeat;
+    background-position: center 0;
+    background-size:cover;
+    background-attachment:fixed;
     text-align: center;
     align-items: center;
+    transform: scale(1);
+    -webkit-background-size: cover;
+    zoom: 1;
 }
 /*----title Container contect----*/
 .logo{
@@ -346,8 +354,8 @@ nav3 ul li a{
     position: absolute;
     text-align: left;
     float: left;
-    top: 480px;
-    left: 600px;
+    top: 680px;
+    right: 200px;
     color: #fff;
     font-size: 72px;
     font-weight: 900;
