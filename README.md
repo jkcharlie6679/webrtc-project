@@ -29,6 +29,8 @@ no_file_path = /home/zhongyu/webrtc_data/origin.jpg
 > The next, we need to add the ssl files in the `webRTC/API` named 'certificate.crt' and 'private.key'.
 
 > After that we can run the API in folder `webrtc/API` using `python create_table/create_account.py` to initial the table.
+> Edit the mail server file named `webrtc/API/SMPT.py` change the sender's mail and the key to yours.
+
 > The last, we use `python api.py` to run the server.
 
 ## WebRTC
@@ -40,4 +42,6 @@ no_file_path = /home/zhongyu/webrtc_data/origin.jpg
 ## Nginx server
 > First we need to add the ssl files in the `webRTC/server/ssl` named 'certificate.crt' and 'private.key'.
 > The next, copy the files in `webrtc/web_server/web` to the `var/www/html` and edit the nginx config followong the file named `webrtc/web_server/default.conf`.
+> But we need to edit the IP of API to our server IP or it won't work.
 > After that we finish the step to establish our web.
+
