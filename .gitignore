@@ -1,0 +1,12 @@
+# vscode
+.vscode
+
+#ssl
+./webrtc/ssl
+./server/ssl
+
+#API
+./API/certificate.crt
+./API/private.key
+./API/nohup.out
+./API/__pycache__
