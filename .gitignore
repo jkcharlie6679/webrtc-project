@@ -1,12 +1,12 @@
 # vscode
 .vscode
 
-#ssl
-./web_server/ssl/.key
-./web_server/ssl/.crt
-./server/ssl/.key
-./server/ssl/.crt
+# ssl
+*.key
+*.crt
 
-#API
-./API/nohup.out
-./API/__pycache__
+# log
+nohup.out
+
+# python
+__pycache__
