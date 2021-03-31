@@ -10,3 +10,6 @@ nohup.out
 
 # python
 __pycache__
+
+# nodejs
+server/package-lock.json
