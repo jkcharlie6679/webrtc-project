@@ -2,8 +2,10 @@
 .vscode
 
 #ssl
-./web_server/ssl/*
-./server/ssl/*
+./web_server/ssl/.key
+./web_server/ssl/.crt
+./server/ssl/.key
+./server/ssl/.crt
 
 #API
 ./API/nohup.out
